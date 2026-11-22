@@ -53,6 +53,7 @@ test("일별 집계 실행·원본 대조·중복 실행 건너뛰기", async ({
     page.getByRole("dialog").getByText("조회 시점 최신", { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "닫기", exact: true }).click();
+  await expect(page.getByRole("dialog")).toBeHidden();
   await page.screenshot({
     path: "test-results/coreerp-daily-batch.png",
     fullPage: true,
