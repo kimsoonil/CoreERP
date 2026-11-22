@@ -61,3 +61,28 @@ erDiagram
 - 금액 bigint 곱셈은 설정한 범위에서 bigint 이내이며 sum은 PostgreSQL numeric으로 집계 후 문자열로 전달합니다. 화면은 BigInt로 합산·표시합니다.
 
 재고 초기 데이터·입고·출고·출고 취소·조정은 stock_movements의 증감과 함께 기록합니다. 예약은 현재고 이동이 아니므로 stock_movements 대신 주문 상태와 audit_logs에 기록합니다. actor는 당시 계정명을 보존하는 문자열이며 비밀번호·고객 개인정보는 감사 정보에 넣지 않습니다.
+
+## 2차 일별 집계
+
+[집계 기준·API·권한·트랜잭션·장애 재처리 문서](daily-batch.md)를 참고하세요.
+
+```mermaid
+erDiagram
+ DAILY_SUMMARY_SOURCES { date business_date PK
+ bigint version }
+ DAILY_SUMMARY_RUNS { uuid id PK
+ date business_date
+ string status }
+ DAILY_SUMMARIES { date business_date PK
+ uuid run_id FK
+ bigint source_version }
+ DAILY_PRODUCT_SUMMARIES { date business_date PK,FK
+ bigint product_id PK,FK }
+ DAILY_CUSTOMER_SUMMARIES { date business_date PK,FK
+ bigint customer_id PK,FK }
+ DAILY_SUMMARY_RUNS ||--o| DAILY_SUMMARIES : committed_by
+ DAILY_SUMMARIES ||--o{ DAILY_PRODUCT_SUMMARIES : contains
+ DAILY_SUMMARIES ||--o{ DAILY_CUSTOMER_SUMMARIES : contains
+```
+
+원본 버전은 업무 변경과 같은 트랜잭션에서 증가합니다. 집계 헤더 삭제 시 상세는 CASCADE로 교체되며 실행 이력은 보존합니다.

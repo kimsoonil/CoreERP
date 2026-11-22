@@ -52,3 +52,7 @@ Swagger UI의 Try it out도 쓰기 요청에는 같은 보안 절차가 필요�
 ```
 
 400: VALIDATION_ERROR / INVALID_PERIOD / INVALID_UNIT, 401: AUTH_REQUIRED / LOGIN_FAILED / ACCOUNT_DISABLED, 403: FORBIDDEN(CSRF 포함), 404: NOT_FOUND, 409: BUSINESS_CONFLICT / DATA_CONFLICT, 500: INTERNAL_ERROR. 검증 실패는 fieldErrors를 포함합니다. SQL 구문·DB 비밀번호·예외 스택은 API 응답에 포함하지 않습니다.
+
+## 2차 일별 집계
+
+[집계 기준·API·권한·트랜잭션·장애 재처리 문서](daily-batch.md)를 참고하세요.

@@ -130,6 +130,8 @@ test("창고 담당자의 메뉴와 API 권한·모바일 레이아웃", async (
     page.getByRole("button", { name: "발주서 생성", exact: true }),
   ).toHaveCount(0);
   expect((await page.request.get("/api/users")).status()).toBe(403);
+  await expect(page.getByRole("link",{name:"일별 집계 배치",exact:true})).toHaveCount(0);
+  expect((await page.request.get("/api/batches/daily/runs")).status()).toBe(403);
   await page.screenshot({
     path: "test-results/coreerp-mobile.png",
     fullPage: true,

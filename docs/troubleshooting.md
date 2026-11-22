@@ -6,9 +6,9 @@
 
 | 검사                                  | 로컬 결과                       |
 | ------------------------------------- | ------------------------------- |
-| Java JUnit·MockMvc                    | 21개 통과                       |
-| Vitest                                | 3개 통과                        |
-| Playwright                            | 3개 통과                        |
+| Java JUnit·MockMvc                    | 35개 통과                       |
+| Vitest                                | 4개 통과                        |
+| Playwright                            | 4개 통과                        |
 | React·TypeScript 빌드 / Maven package | 통과                            |
 | SQL 벤치마크                          | 독립 DB 20만 행, 원본 계획 보관 |
 
@@ -16,9 +16,9 @@
 
 [2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45028700948), 검증 코드 커밋 `fc16025`.
 
-- backend: JUnit 21개를 Docker의 PostgreSQL 17 Testcontainers에서 실행.
-- frontend: TypeScript·Vite 빌드와 Vitest 3개 실행.
-- browser: 별도 PostgreSQL 17 demo DB에서 Playwright 3개 업무 흐름 실행.
+- backend: JUnit 35개를 Docker의 PostgreSQL 17 Testcontainers에서 실행.
+- frontend: TypeScript·Vite 빌드와 Vitest 4개 실행.
+- browser: 별도 PostgreSQL 17 demo DB에서 Playwright 4개 업무 흐름 실행.
 - docker: 실제 이미지 빌드·Compose 3개 서비스 기동, 익명 API 401, Swagger UI 및 OpenAPI 인증 경로 접속 확인.
 - sql-performance: 별도 PostgreSQL 17의 20만 행 벤치마크 재현, 원본 JSON 아티팩트 보관.
 
@@ -45,3 +45,7 @@
 - demo 변경/암호 변경: Flyway seed는 한 번만 적용하며 기존 계정의 암호를 부팅 시 덮어쓰지 않습니다. demo를 운영으로 재활용하지 마세요.
 - Testcontainers 연결 실패: 로컬 Docker 엔진을 먼저 실행하거나 별도의 일회용 PostgreSQL 환경변수로 테스트하세요. CI는 Docker 지원 Ubuntu 실행기에서 검사합니다.
 - 입고/출고 409: 현재 문서 상태, 미입고 수량, 가용 재고, 재고 상한, 재사용한 요청 키의 내용이 바뀌었는지 확인하세요.
+
+## 2차 일별 집계
+
+[집계 기준·API·권한·트랜잭션·장애 재처리 문서](daily-batch.md)를 참고하세요.

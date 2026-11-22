@@ -38,7 +38,7 @@ class CoreIntegrationTest extends PostgresTestSupport {
         "Refusing cleanup outside a _test database");
     sql.execute(
         "TRUNCATE"
-            + " coreerp.requests,coreerp.audit_logs,coreerp.stock_movements,coreerp.shipment_items,coreerp.shipments,coreerp.sales_order_items,coreerp.sales_orders,coreerp.goods_receipt_items,coreerp.goods_receipts,coreerp.purchase_order_items,coreerp.purchase_orders,coreerp.inventory,coreerp.products,coreerp.suppliers,coreerp.customers,coreerp.warehouses"
+            + " coreerp.daily_product_summaries,coreerp.daily_customer_summaries,coreerp.daily_summaries,coreerp.daily_summary_runs,coreerp.daily_summary_sources,coreerp.requests,coreerp.audit_logs,coreerp.stock_movements,coreerp.shipment_items,coreerp.shipments,coreerp.sales_order_items,coreerp.sales_orders,coreerp.goods_receipt_items,coreerp.goods_receipts,coreerp.purchase_order_items,coreerp.purchase_orders,coreerp.inventory,coreerp.products,coreerp.suppliers,coreerp.customers,coreerp.warehouses"
             + " RESTART IDENTITY CASCADE");
     for (String role : List.of("PURCHASE", "WAREHOUSE", "SALES"))
       if (db.account(role.toLowerCase()) == null)

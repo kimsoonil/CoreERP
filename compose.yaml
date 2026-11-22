@@ -23,6 +23,8 @@ services:
       APP_DEMO_PASSWORD: ${APP_DEMO_PASSWORD:?Set APP_DEMO_PASSWORD}
       SPRING_PROFILES_ACTIVE: ${APP_PROFILE:-demo}
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      DAILY_BATCH_ENABLED: ${DAILY_BATCH_ENABLED:-false}
+      DAILY_BATCH_CRON: ${DAILY_BATCH_CRON:-0 10 2 * * *}
     depends_on:
       db:
         condition: service_healthy

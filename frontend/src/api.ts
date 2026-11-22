@@ -165,3 +165,5 @@ export const label = (s: string) =>
     CANCELLED: "취소",
     CONFIRMED: "확정",
   })[s] || s;
+
+export function previousDate(value=today()){const date=new Date(value+'T00:00:00Z');date.setUTCDate(date.getUTCDate()-1);return date.toISOString().slice(0,10);}

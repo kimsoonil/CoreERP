@@ -44,7 +44,13 @@ flowchart LR
 - 한국 시간 기준 기간·상품·고객사별 출고 매출, 발주·입고·출고 건수·수량, 재고 이력
 - 표준 오류 응답, Swagger, Flyway, 데이터 제약조건, 테스트·빌드·Docker 기동 CI
 
-부분 출고·부분 출고 취소, 반품·회계 정산·세금·할인·결제, 다중 회사 테넌트, 비밀번호 변경 UI·재설정, 알림/파일 업로드, 일별 집계 배치는 포함하지 않습니다. **일별 집계 배치는 2차 개발 대상**입니다. 여러 역할을 같은 사용자에 연결하는 DB 구조는 있으나 사용자 생성 UI는 한 역할씩 지정합니다.
+부분 출고·부분 출고 취소, 반품·회계 정산·세금·할인·결제, 다중 회사 테넌트, 비밀번호 변경 UI·재설정, 알림/파일 업로드는 포함하지 않습니다. **2차 일별 집계 배치는 구현·검증했습니다.** 여러 역할을 같은 사용자에 연결하는 DB 구조는 있으나 사용자 생성 UI는 한 역할씩 지정합니다.
+
+## 2차 개발 — 일별 집계
+
+ADMIN 전용 수동 실행과 선택형 KST 자동 스케줄을 제공합니다. 원본 버전 기반 중복 건너뛰기, 동시 실행 차단, 스냅샷 정합성, 실패 롤백·재처리 및 커밋 후 이력 복구를 구현했습니다. [설계·실행·제약](docs/daily-batch.md) · [집계 SQL](backend/src/main/resources/mapper/DailySummaryMapper.xml) · [전용 테스트](backend/src/test/java/dev/coreerp/DailySummaryIntegrationTest.java)
+
+![일별 집계 배치](docs/images/daily-batch.png)
 
 ## 실행 — Docker Compose
 
@@ -103,7 +109,7 @@ npm run test:e2e
 
 검증 항목: 초과 출고/예약 거부, 동시 요청 재고 정합성, 중복 출고 단일 차감, 부분 입고 초과 거부, 강제 DB 장애 전체 롤백, 권한·CSRF·계정 상태, 원본 거래와 SQL 집계 일치. 브라우저는 실제 API로 상품 생성 → 발주 → 두 번 부분 입고 → 판매 예약 → 출고 → 취소 후 재고 복원, 모바일 메뉴, 1만 상품 페이지 이동·검색을 검사합니다.
 
-검증 완료: Java 통합 테스트 21개, 프런트 단위 테스트 3개, 브라우저 검사 3개. [GitHub Actions 5개 작업 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45028700948). CI는 같은 코드의 Testcontainers, 프런트, 브라우저, Docker 기동, SQL 벤치마크를 실행하며 원격 결과는 Actions 기록을 확인하세요. 미실행 검사를 통과했다고 간주하지 않습니다.
+검증 완료: Java 통합 테스트 35개, 프런트 단위 테스트 4개, 브라우저 검사 4개. [GitHub Actions 5개 작업 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45028700948). CI는 같은 코드의 Testcontainers, 프런트, 브라우저, Docker 기동, SQL 벤치마크를 실행하며 원격 결과는 Actions 기록을 확인하세요. 미실행 검사를 통과했다고 간주하지 않습니다.
 
 ## 설계·측정·포트폴리오 문서
 

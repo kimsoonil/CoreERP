@@ -21,6 +21,7 @@ const Inventory = lazy(() => import("./features/Inventory"));
 const Documents = lazy(() => import("./features/Documents"));
 const Dashboard = lazy(() => import("./features/Dashboard"));
 const Reports = lazy(() => import("./features/Reports"));
+const DailyBatch = lazy(() => import("./features/DailyBatch"));
 const Operations = lazy(() => import("./features/Operations"));
 const menu = [
   { path: "/", name: "업무 현황", icon: DashboardOutlined, roles: [] },
@@ -80,6 +81,7 @@ const menu = [
     icon: ReceiptLongOutlined,
     roles: ["ADMIN"],
   },
+  { path: "/batches", name: "일별 집계 배치", icon: ReceiptLongOutlined, roles: ["ADMIN"] },
   {
     path: "/users",
     name: "사용자 관리",
@@ -162,7 +164,7 @@ export default function App() {
         </header>
         {logoutError && <Alert severity="error">{logoutError}</Alert>}
         <Suspense fallback={<Loading />}>
-          <Routes>
+          <Routes><Route path="/batches" element={allowed("/batches")?<DailyBatch/>:<Alert severity="error">접근 권한이 없습니다.</Alert>}/>
             <Route path="/" element={<Dashboard user={user} />} />
             {["products", "suppliers", "customers", "warehouses"].map(
               (type) => (

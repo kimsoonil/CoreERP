@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.coreerp.DailySummaryMapper">
+ <sql id="confirmed">FROM coreerp.shipments s
+ JOIN coreerp.sales_orders o ON o.id=s.sales_order_id
+ JOIN coreerp.shipment_items si ON si.shipment_id=s.id
+ JOIN coreerp.sales_order_items oi ON oi.order_id=o.id AND oi.product_id=si.product_id
+ WHERE s.status='CONFIRMED' AND s.created_at &gt;= #{from} AND s.created_at &lt; #{to}</sql>
+ <insert id="insertSummary">
+ INSERT INTO coreerp.daily_summaries(business_date,source_version,run_id,sales_amount,sales_shipments,shipped_quantity,purchases,ordered_quantity,receipts,receipt_quantity)
+ WITH sales AS (
+   SELECT coalesce(sum(oi.unit_price*si.quantity),0) amount,count(DISTINCT s.id) shipments,coalesce(sum(si.quantity),0) quantity
+   <include refid="confirmed"/>
+ ), purchases AS (
+   SELECT count(DISTINCT o.id) count,coalesce(sum(i.quantity),0) quantity
+   FROM coreerp.purchase_orders o JOIN coreerp.purchase_order_items i ON i.order_id=o.id
+   WHERE o.status!='CANCELLED' AND o.created_at &gt;= #{from} AND o.created_at &lt; #{to}
+ ), receipts AS (
+   SELECT count(DISTINCT r.id) count,coalesce(sum(i.quantity),0) quantity
+   FROM coreerp.goods_receipts r JOIN coreerp.goods_receipt_items i ON i.receipt_id=r.id
+   WHERE r.created_at &gt;= #{from} AND r.created_at &lt; #{to}
+ ) SELECT #{date},#{version},#{id},s.amount,s.shipments,s.quantity,p.count,p.quantity,r.count,r.quantity
+ FROM sales s CROSS JOIN purchases p CROSS JOIN receipts r
+ </insert>
+ <insert id="insertProducts">
+ INSERT INTO coreerp.daily_product_summaries(business_date,product_id,quantity,amount)
+ SELECT #{date},si.product_id,sum(si.quantity),sum(oi.unit_price*si.quantity)
+ <include refid="confirmed"/> GROUP BY si.product_id
+ </insert>
+ <insert id="insertCustomers">
+ INSERT INTO coreerp.daily_customer_summaries(business_date,customer_id,quantity,amount)
+ SELECT #{date},o.customer_id,sum(si.quantity),sum(oi.unit_price*si.quantity)
+ <include refid="confirmed"/> GROUP BY o.customer_id
+ </insert>
+ <sql id="summaryColumns">s.business_date,s.source_version,coalesce(r.version,0) current_source_version,s.run_id,s.calculated_at,s.sales_amount::text,s.sales_shipments,s.shipped_quantity,s.purchases,s.ordered_quantity,s.receipts,s.receipt_quantity,(s.source_version&lt;&gt;coalesce(r.version,0)) stale</sql>
+ <select id="summary" resultType="dev.coreerp.BatchModels$Summary">SELECT <include refid="summaryColumns"/> FROM coreerp.daily_summaries s LEFT JOIN coreerp.daily_summary_sources r USING(business_date) WHERE s.business_date=#{date}</select>
+ <select id="summaries" resultType="dev.coreerp.BatchModels$Summary">SELECT <include refid="summaryColumns"/> FROM coreerp.daily_summaries s LEFT JOIN coreerp.daily_summary_sources r USING(business_date) WHERE s.business_date &gt;= #{from} AND s.business_date &lt;= #{to} ORDER BY s.business_date DESC</select>
+</mapper>

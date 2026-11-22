@@ -13,4 +13,4 @@ React·TypeScript와 Java 21·Spring Boot·MyBatis·PostgreSQL로 구매 발주,
 - MyBatis JOIN·CTE·DENSE_RANK 집계와 원본 거래 대조, SQL EXPLAIN ANALYZE 인덱스 전후 실험
 - Java 통합·브라우저 검사, Testcontainers·GitHub Actions·Docker Compose 실행 환경 제공
 
-실제 회사에서 Java ERP를 운영한 경력으로 표현하지 않습니다. 프론트엔드 실무 경력 및 과거 직접 SQL 작성 경험과, 이 개인 프로젝트에서 새로 구현·검증한 Java/DB 역량을 구분합니다. SQL 성능 수치는 측정 조건을 함께 설명할 수 있을 때만 사용합니다. 외부 운영 배포·일별 배치는 완료했다고 쓰지 않습니다.
+실제 회사에서 Java ERP를 운영한 경력으로 표현하지 않습니다. 프론트엔드 실무 경력 및 과거 직접 SQL 작성 경험과, 이 개인 프로젝트에서 새로 구현·검증한 Java/DB 역량을 구분합니다. SQL 성능 수치는 측정 조건을 함께 설명할 수 있을 때만 사용합니다. 외부 운영 배포는 완료했다고 쓰지 않습니다. 일별 집계 배치는 원본 버전 기반 중복 방지, 스냅샷 정합성, 실패 롤백·재처리와 이력 복구를 구현·테스트했습니다.

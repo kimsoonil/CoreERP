@@ -5,44 +5,31 @@
     "description": "발주·부분 입고·창고 재고·판매·출고 API. 쓰기 요청에는 CSRF 토큰이 필요합니다.",
     "version": "1.0"
   },
-  "servers": [
-    {
-      "url": "/"
-    }
-  ],
+  "servers": [{ "url": "/" }],
   "paths": {
     "/api/warehouses/{id}": {
       "put": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "warehouseUpdate",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MasterInput"
-              }
+              "schema": { "$ref": "#/components/schemas/MasterInput" }
             }
           },
           "required": true
@@ -50,90 +37,56 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "delete": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "warehouseDisable",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/suppliers/{id}": {
       "put": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "supplierUpdate",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MasterInput"
-              }
+              "schema": { "$ref": "#/components/schemas/MasterInput" }
             }
           },
           "required": true
@@ -141,90 +94,56 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "delete": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "supplierDisable",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/products/{id}": {
       "put": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "productUpdate",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductInput"
-              }
+              "schema": { "$ref": "#/components/schemas/ProductInput" }
             }
           },
           "required": true
@@ -232,90 +151,56 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "delete": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "disableProduct",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/customers/{id}": {
       "put": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "customerUpdate",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MasterInput"
-              }
+              "schema": { "$ref": "#/components/schemas/MasterInput" }
             }
           },
           "required": true
@@ -323,63 +208,36 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "delete": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "customerDisable",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/warehouses": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "warehouses",
         "parameters": [
           {
@@ -421,25 +279,13 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "warehouse",
         "parameters": [
           {
@@ -447,17 +293,13 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MasterInput"
-              }
+              "schema": { "$ref": "#/components/schemas/MasterInput" }
             }
           },
           "required": true
@@ -465,50 +307,26 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/users": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "users",
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "createUser",
         "parameters": [
           {
@@ -516,17 +334,13 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserInput"
-              }
+              "schema": { "$ref": "#/components/schemas/UserInput" }
             }
           },
           "required": true
@@ -534,27 +348,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/suppliers": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "suppliers",
         "parameters": [
           {
@@ -596,25 +398,13 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "supplier",
         "parameters": [
           {
@@ -622,17 +412,13 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MasterInput"
-              }
+              "schema": { "$ref": "#/components/schemas/MasterInput" }
             }
           },
           "required": true
@@ -640,27 +426,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/sales": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "sales",
         "parameters": [
           {
@@ -701,25 +475,13 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "createSale",
         "parameters": [
           {
@@ -727,17 +489,13 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SalesInput"
-              }
+              "schema": { "$ref": "#/components/schemas/SalesInput" }
             }
           },
           "required": true
@@ -745,54 +503,35 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/sales/{id}/shipments": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "ship",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestKey"
-              }
+              "schema": { "$ref": "#/components/schemas/RequestKey" }
             }
           },
           "required": true
@@ -800,103 +539,61 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/sales/{id}/shipment-cancellation": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "cancelShip",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/sales/{id}/cancel": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "cancelSale",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/purchases": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "purchases",
         "parameters": [
           {
@@ -937,25 +634,13 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "createPurchase",
         "parameters": [
           {
@@ -963,17 +648,13 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseInput"
-              }
+              "schema": { "$ref": "#/components/schemas/PurchaseInput" }
             }
           },
           "required": true
@@ -981,54 +662,35 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/purchases/{id}/receipts": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "receive",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ReceiptInput"
-              }
+              "schema": { "$ref": "#/components/schemas/ReceiptInput" }
             }
           },
           "required": true
@@ -1036,103 +698,61 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/purchases/{id}/cancel": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "cancelPurchase",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/purchases/{id}/approve": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "approve",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/products": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "products",
         "parameters": [
           {
@@ -1176,23 +796,15 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageProduct"
-                }
+                "schema": { "$ref": "#/components/schemas/PageProduct" }
               }
             }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "product",
         "parameters": [
           {
@@ -1200,17 +812,13 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductInput"
-              }
+              "schema": { "$ref": "#/components/schemas/ProductInput" }
             }
           },
           "required": true
@@ -1218,27 +826,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/inventory/adjustments": {
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "adjust",
         "parameters": [
           {
@@ -1246,38 +842,24 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Adjustment"
-              }
+              "schema": { "$ref": "#/components/schemas/Adjustment" }
             }
           },
           "required": true
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/customers": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "customers",
         "parameters": [
           {
@@ -1319,25 +901,13 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       },
       "post": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "customer",
         "parameters": [
           {
@@ -1345,17 +915,43 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MasterInput"
-              }
+              "schema": { "$ref": "#/components/schemas/MasterInput" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        },
+        "security": [{ "session": [] }]
+      }
+    },
+    "/api/batches/daily": {
+      "post": {
+        "tags": ["batch-controller"],
+        "operationId": "run",
+        "parameters": [
+          {
+            "name": "X-CSRF-TOKEN",
+            "in": "header",
+            "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/DailyRequest" }
             }
           },
           "required": true
@@ -1364,270 +960,162 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+              "*/*": { "schema": { "$ref": "#/components/schemas/RunResult" } }
             }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/users/{id}/status": {
       "patch": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "status",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           },
           {
             "name": "X-CSRF-TOKEN",
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserStatus"
-              }
+              "schema": { "$ref": "#/components/schemas/UserStatus" }
             }
           },
           "required": true
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "session": [] }]
       }
     },
     "/api/sales/{id}": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "sale",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/reports/sales": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "salesReport",
         "parameters": [
           {
             "name": "from",
             "in": "query",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
+            "schema": { "type": "string", "format": "date" }
           },
           {
             "name": "to",
             "in": "query",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
+            "schema": { "type": "string", "format": "date" }
           },
           {
             "name": "unit",
             "in": "query",
             "required": false,
-            "schema": {
-              "type": "string",
-              "default": "day"
-            }
+            "schema": { "type": "string", "default": "day" }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/reports/flows": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "flows",
         "parameters": [
           {
             "name": "from",
             "in": "query",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
+            "schema": { "type": "string", "format": "date" }
           },
           {
             "name": "to",
             "in": "query",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
+            "schema": { "type": "string", "format": "date" }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/purchases/{id}": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "purchase",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "schema": { "type": "integer", "format": "int64" }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/overview": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "overview",
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/movements": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "movements",
         "parameters": [
           {
@@ -1658,27 +1146,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/inventory": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "inventory",
         "parameters": [
           {
@@ -1706,10 +1182,7 @@
             "name": "low",
             "in": "query",
             "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
+            "schema": { "type": "boolean", "default": false }
           },
           {
             "name": "page",
@@ -1739,27 +1212,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/health": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "health",
         "responses": {
           "200": {
@@ -1768,9 +1229,7 @@
               "*/*": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "additionalProperties": { "type": "string" }
                 }
               }
             }
@@ -1779,46 +1238,131 @@
         "security": []
       }
     },
+    "/api/batches/daily/summaries": {
+      "get": {
+        "tags": ["batch-controller"],
+        "operationId": "summaries",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "date" }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "date" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Summary" }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "session": [] }]
+      }
+    },
+    "/api/batches/daily/summaries/{date}": {
+      "get": {
+        "tags": ["batch-controller"],
+        "operationId": "detail",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "date" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/DayDetail" } }
+            }
+          }
+        },
+        "security": [{ "session": [] }]
+      }
+    },
+    "/api/batches/daily/runs": {
+      "get": {
+        "tags": ["batch-controller"],
+        "operationId": "runs",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0,
+              "maximum": 100000,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25,
+              "maximum": 200,
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageRun" } }
+            }
+          }
+        },
+        "security": [{ "session": [] }]
+      }
+    },
     "/api/auth/me": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "me",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
+                "schema": { "type": "object", "additionalProperties": {} }
               }
             }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/auth/csrf": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "csrf",
         "parameters": [
           {
             "name": "token",
             "in": "query",
             "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/CsrfToken"
-            }
+            "schema": { "$ref": "#/components/schemas/CsrfToken" }
           }
         ],
         "responses": {
@@ -1828,9 +1372,7 @@
               "*/*": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "additionalProperties": { "type": "string" }
                 }
               }
             }
@@ -1841,9 +1383,7 @@
     },
     "/api/audits": {
       "get": {
-        "tags": [
-          "api-controller"
-        ],
+        "tags": ["api-controller"],
         "operationId": "audits",
         "parameters": [
           {
@@ -1874,20 +1414,10 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "content": { "*/*": { "schema": { "type": "object" } } }
           }
         },
-        "security": [
-          {
-            "session": []
-          }
-        ]
+        "security": [{ "session": [] }]
       }
     },
     "/api/auth/login": {
@@ -1899,9 +1429,7 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
@@ -1910,33 +1438,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string",
-                    "format": "password"
-                  }
+                  "username": { "type": "string" },
+                  "password": { "type": "string", "format": "password" }
                 },
-                "required": [
-                  "password",
-                  "username"
-                ]
+                "required": ["password", "username"]
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "로그인 성공; CSRF 토큰 재발급 필요"
-          },
-          "401": {
-            "description": "계정 또는 비밀번호 오류"
-          },
-          "403": {
-            "description": "CSRF 토큰 오류"
-          }
+          "200": { "description": "로그인 성공; CSRF 토큰 재발급 필요" },
+          "401": { "description": "계정 또는 비밀번호 오류" },
+          "403": { "description": "CSRF 토큰 오류" }
         },
         "security": []
       }
@@ -1950,16 +1464,10 @@
             "in": "header",
             "description": "GET /api/auth/csrf 응답 token. 세션 쿠키와 함께 전송, 로그인 후 새 토큰 사용.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "세션 종료"
-          }
-        }
+        "responses": { "204": { "description": "세션 종료" } }
       }
     }
   },
@@ -1974,16 +1482,9 @@
             "minLength": 0,
             "pattern": "[A-Za-z0-9_-]+"
           },
-          "name": {
-            "type": "string",
-            "maxLength": 120,
-            "minLength": 0
-          }
+          "name": { "type": "string", "maxLength": 120, "minLength": 0 }
         },
-        "required": [
-          "code",
-          "name"
-        ]
+        "required": ["code", "name"]
       },
       "ProductInput": {
         "type": "object",
@@ -1994,11 +1495,7 @@
             "minLength": 0,
             "pattern": "[A-Za-z0-9_-]+"
           },
-          "name": {
-            "type": "string",
-            "maxLength": 120,
-            "minLength": 0
-          },
+          "name": { "type": "string", "maxLength": 120, "minLength": 0 },
           "price": {
             "type": "integer",
             "format": "int64",
@@ -2012,10 +1509,7 @@
             "minimum": 0
           }
         },
-        "required": [
-          "name",
-          "sku"
-        ]
+        "required": ["name", "sku"]
       },
       "UserInput": {
         "type": "object",
@@ -2025,22 +1519,14 @@
             "minLength": 1,
             "pattern": "[a-zA-Z0-9_-]{3,40}"
           },
-          "password": {
-            "type": "string",
-            "maxLength": 72,
-            "minLength": 12
-          },
+          "password": { "type": "string", "maxLength": 72, "minLength": 12 },
           "role": {
             "type": "string",
             "minLength": 1,
             "pattern": "ADMIN|PURCHASE|WAREHOUSE|SALES"
           }
         },
-        "required": [
-          "password",
-          "role",
-          "username"
-        ]
+        "required": ["password", "role", "username"]
       },
       "Line": {
         "type": "object",
@@ -2061,10 +1547,7 @@
       "SalesInput": {
         "type": "object",
         "properties": {
-          "requestKey": {
-            "type": "string",
-            "format": "uuid"
-          },
+          "requestKey": { "type": "string", "format": "uuid" },
           "warehouseId": {
             "type": "integer",
             "format": "int64",
@@ -2077,29 +1560,17 @@
           },
           "items": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Line"
-            },
+            "items": { "$ref": "#/components/schemas/Line" },
             "maxItems": 100,
             "minItems": 0
           }
         },
-        "required": [
-          "items",
-          "requestKey"
-        ]
+        "required": ["items", "requestKey"]
       },
       "RequestKey": {
         "type": "object",
-        "properties": {
-          "requestKey": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "required": [
-          "requestKey"
-        ]
+        "properties": { "requestKey": { "type": "string", "format": "uuid" } },
+        "required": ["requestKey"]
       },
       "BuyLine": {
         "type": "object",
@@ -2126,10 +1597,7 @@
       "PurchaseInput": {
         "type": "object",
         "properties": {
-          "requestKey": {
-            "type": "string",
-            "format": "uuid"
-          },
+          "requestKey": { "type": "string", "format": "uuid" },
           "warehouseId": {
             "type": "integer",
             "format": "int64",
@@ -2142,46 +1610,30 @@
           },
           "items": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BuyLine"
-            },
+            "items": { "$ref": "#/components/schemas/BuyLine" },
             "maxItems": 100,
             "minItems": 0
           }
         },
-        "required": [
-          "items",
-          "requestKey"
-        ]
+        "required": ["items", "requestKey"]
       },
       "ReceiptInput": {
         "type": "object",
         "properties": {
-          "requestKey": {
-            "type": "string",
-            "format": "uuid"
-          },
+          "requestKey": { "type": "string", "format": "uuid" },
           "items": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Line"
-            },
+            "items": { "$ref": "#/components/schemas/Line" },
             "maxItems": 100,
             "minItems": 0
           }
         },
-        "required": [
-          "items",
-          "requestKey"
-        ]
+        "required": ["items", "requestKey"]
       },
       "Adjustment": {
         "type": "object",
         "properties": {
-          "requestKey": {
-            "type": "string",
-            "format": "uuid"
-          },
+          "requestKey": { "type": "string", "format": "uuid" },
           "warehouseId": {
             "type": "integer",
             "format": "int64",
@@ -2198,16 +1650,25 @@
             "maximum": 1000000,
             "minimum": -1000000
           },
-          "reason": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 0
-          }
+          "reason": { "type": "string", "maxLength": 200, "minLength": 0 }
         },
-        "required": [
-          "reason",
-          "requestKey"
-        ]
+        "required": ["reason", "requestKey"]
+      },
+      "DailyRequest": {
+        "type": "object",
+        "properties": {
+          "businessDate": { "type": "string", "format": "date" }
+        },
+        "required": ["businessDate"]
+      },
+      "RunResult": {
+        "type": "object",
+        "properties": {
+          "runId": { "type": "string", "format": "uuid" },
+          "businessDate": { "type": "string", "format": "date" },
+          "status": { "type": "string" },
+          "sourceVersion": { "type": "integer", "format": "int64" }
+        }
       },
       "UserStatus": {
         "type": "object",
@@ -2218,72 +1679,116 @@
             "pattern": "ACTIVE|LOCKED"
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       },
       "PageProduct": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Product"
-            }
+            "items": { "$ref": "#/components/schemas/Product" }
           },
-          "total": {
-            "type": "integer",
-            "format": "int64"
-          }
+          "total": { "type": "integer", "format": "int64" }
         }
       },
       "Product": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
+          "id": { "type": "integer", "format": "int64" },
+          "sku": { "type": "string" },
+          "name": { "type": "string" },
+          "price": { "type": "integer", "format": "int64" },
+          "safetyStock": { "type": "integer", "format": "int32" },
+          "active": { "type": "boolean" }
+        }
+      },
+      "Summary": {
+        "type": "object",
+        "properties": {
+          "businessDate": { "type": "string", "format": "date" },
+          "sourceVersion": { "type": "integer", "format": "int64" },
+          "currentSourceVersion": { "type": "integer", "format": "int64" },
+          "runId": { "type": "string", "format": "uuid" },
+          "calculatedAt": { "type": "string", "format": "date-time" },
+          "salesAmount": { "type": "string" },
+          "salesShipments": { "type": "integer", "format": "int64" },
+          "shippedQuantity": { "type": "integer", "format": "int64" },
+          "purchases": { "type": "integer", "format": "int64" },
+          "orderedQuantity": { "type": "integer", "format": "int64" },
+          "receipts": { "type": "integer", "format": "int64" },
+          "receiptQuantity": { "type": "integer", "format": "int64" },
+          "stale": { "type": "boolean" }
+        }
+      },
+      "CustomerSales": {
+        "type": "object",
+        "properties": {
+          "customerId": { "type": "integer", "format": "int64" },
+          "name": { "type": "string" },
+          "quantity": { "type": "integer", "format": "int64" },
+          "amount": { "type": "string" }
+        }
+      },
+      "DayDetail": {
+        "type": "object",
+        "properties": {
+          "summary": { "$ref": "#/components/schemas/Summary" },
+          "products": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ProductSales" }
           },
-          "sku": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "safetyStock": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "active": {
-            "type": "boolean"
+          "customers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CustomerSales" }
           }
+        }
+      },
+      "ProductSales": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "integer", "format": "int64" },
+          "sku": { "type": "string" },
+          "name": { "type": "string" },
+          "quantity": { "type": "integer", "format": "int64" },
+          "amount": { "type": "string" },
+          "rank": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PageRun": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Run" }
+          },
+          "total": { "type": "integer", "format": "int64" }
+        }
+      },
+      "Run": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "businessDate": { "type": "string", "format": "date" },
+          "status": { "type": "string" },
+          "sourceVersion": { "type": "integer", "format": "int64" },
+          "triggerType": { "type": "string" },
+          "actor": { "type": "string" },
+          "startedAt": { "type": "string", "format": "date-time" },
+          "finishedAt": { "type": "string", "format": "date-time" },
+          "errorCode": { "type": "string" }
         }
       },
       "CsrfToken": {
         "type": "object",
         "properties": {
-          "parameterName": {
-            "type": "string"
-          },
-          "token": {
-            "type": "string"
-          },
-          "headerName": {
-            "type": "string"
-          }
+          "parameterName": { "type": "string" },
+          "headerName": { "type": "string" },
+          "token": { "type": "string" }
         }
       }
     },
     "securitySchemes": {
-      "session": {
-        "type": "apiKey",
-        "name": "JSESSIONID",
-        "in": "cookie"
-      }
+      "session": { "type": "apiKey", "name": "JSESSIONID", "in": "cookie" }
     }
   }
 }

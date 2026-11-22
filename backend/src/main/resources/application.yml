@@ -26,6 +26,9 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 app:
+  batch:
+    enabled: ${DAILY_BATCH_ENABLED:false}
+    cron: ${DAILY_BATCH_CRON:0 10 2 * * *}
   admin-password: ${APP_ADMIN_PASSWORD:}
   demo-password: ${APP_DEMO_PASSWORD:}
 ---
