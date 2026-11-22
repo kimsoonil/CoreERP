@@ -93,7 +93,7 @@ npm run dev
 
 ## 검증
 
-[커버리지 측정·전후 비교·남은 검증](docs/coverage.md): Java 라인 84.66%·분기 77.04%, React 라인 42.33%·분기 43.82%. 전체 소스를 포함한 로컬 측정이며 Playwright 커버리지는 합산하지 않습니다.
+[커버리지 측정·전후 비교·남은 검증](docs/coverage.md): Java 라인 84.66%·분기 77.04%, React 라인 74.54%·분기 72.94%. 전체 소스를 포함한 로컬 측정이며 Playwright 커버리지는 합산하지 않습니다.
 
 ```sh
 cd backend
@@ -111,7 +111,7 @@ npm run test:e2e
 
 검증 항목: 초과 출고/예약 거부, 동시 요청 재고 정합성, 중복 출고 단일 차감, 부분 입고 초과 거부, 강제 DB 장애 전체 롤백, 권한·CSRF·계정 상태, 원본 거래와 SQL 집계 일치. 브라우저는 실제 API로 상품 생성 → 발주 → 두 번 부분 입고 → 판매 예약 → 출고 → 취소 후 재고 복원, 모바일 메뉴, 1만 상품 페이지 이동·검색을 검사합니다.
 
-검증 완료: Java 단위·통합 테스트 52개, 프런트 단위·컴포넌트 테스트 27개, 브라우저 검사 4개. [GitHub Actions 5개 작업 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45035789487). CI는 같은 코드의 Testcontainers, 프런트, 브라우저, Docker 기동, SQL 벤치마크를 실행하며 원격 결과는 Actions 기록을 확인하세요. 미실행 검사를 통과했다고 간주하지 않습니다.
+검증 완료: Java 단위·통합 테스트 52개, 프런트 단위·컴포넌트 테스트 39개, 브라우저 검사 4개. [GitHub Actions 5개 작업 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45035789487). CI는 같은 코드의 Testcontainers, 프런트, 브라우저, Docker 기동, SQL 벤치마크를 실행하며 원격 결과는 Actions 기록을 확인하세요. 미실행 검사를 통과했다고 간주하지 않습니다.
 
 ## 설계·측정·포트폴리오 문서
 

@@ -22,9 +22,13 @@
 | api-client.test.ts | 세션 요청·CSRF 발급/재사용/로그인 후 갱신, 401 만료 통지와 다음 요청의 토큰 재발급, 업무/비JSON 오류, CSRF 실패 시 변경 차단 |
 | features/DailyBatch.test.tsx | 빈 결과와 기본 날짜, 실행 중 중복 클릭 방지, SKIPPED 문구, 실패 후 이력 갱신·재시도, 조회 오류, 상품·고객사 상세·닫기 |
 
-`frontend`에서 `npm ci && npm test`로 27개를 실행하고 `npm run build`로 TypeScript와 배포 빌드를 확인합니다. 컴포넌트 테스트는 실제 MUI·React Query 컴포넌트를 렌더링하며 API 경계만 모의 응답으로 대체합니다. 테스트마다 캐시를 격리하고 자동 재시도를 꺼 예상하지 못한 요청이 검사를 가리지 않게 합니다.
+`frontend`에서 `npm ci && npm test`로 39개를 실행하고 `npm run build`로 TypeScript와 배포 빌드를 확인합니다. 컴포넌트 테스트는 실제 MUI·React Query 컴포넌트를 렌더링하며 API 경계만 모의 응답으로 대체합니다. 테스트마다 캐시를 격리하고 자동 재시도를 꺼 예상하지 못한 요청이 검사를 가리지 않게 합니다.
 
 jsdom 검사는 실제 브라우저 레이아웃이나 DB 트랜잭션 검사를 대신하지 않습니다. `npm run test:e2e`의 Playwright 4개는 실행 중인 demo API·Vite와 합성 DB로 실제 업무 흐름·모바일 권한·1만 상품 페이지·일별 집계를 별도로 검사합니다. Vitest include는 src의 단위/컴포넌트 테스트만 포함해 Playwright와 분리합니다.
+
+## React 라인 70% 목표 보강
+
+ManagementScreens.test.tsx 12개를 추가했습니다. 상품 등록 필수값/숫자 변환, 수정 PUT·사용 중지 확인, 역할별 편집 제한과 검색 제출, 고객사 등록 실패 재시도, 재고 조정 0 차단·실패 시 요청 키 유지, 부족/창고 필터, 큰 정수 매출·월별 기간 변경·빈 매출, 대시보드 권한 링크, 자기 계정 잠금 차단·다른 계정 잠금, 사용자 생성, 입출고 기간 변경을 실제 MUI·React Query에서 검사합니다.
 
 ## 이번 커버리지 기반 보강
 
