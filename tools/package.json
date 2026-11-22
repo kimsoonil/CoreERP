@@ -1,0 +1,11 @@
+{
+  "name": "coreerp-sql-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "benchmark": "node benchmark.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.16.0"
+  }
+}

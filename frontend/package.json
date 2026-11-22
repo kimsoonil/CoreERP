@@ -1,0 +1,33 @@
+{
+  "name": "coreerp-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@mui/material": "^7.3.0",
+    "@mui/icons-material": "^7.3.0",
+    "@mui/x-data-grid": "^8.17.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@tanstack/react-query": "^5.90.0",
+    "react-hook-form": "^7.65.0",
+    "react-router-dom": "^7.9.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.2.0",
+    "vitest": "^4.0.0"
+  }
+}

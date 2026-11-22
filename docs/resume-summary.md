@@ -1,0 +1,16 @@
+# 이력서용 프로젝트 요약
+
+## 짧은 소개
+
+**CoreERP — ERP·SCM 통합관리 / 개인 프로젝트**
+React·TypeScript와 Java 21·Spring Boot·MyBatis·PostgreSQL로 구매 발주, 부분 입고, 창고별 재고, 판매 예약·출고·취소 흐름을 구현했습니다. 행 잠금·트랜잭션·멱등 요청으로 수량 정합성을 처리하고, 강제 장애 및 동시 요청 테스트와 Docker·CI 실행 구성을 작성했습니다.
+
+## 설명에 사용할 내용
+
+- 창고×상품별 현재고·예약 재고 모델, 구매·판매 문서 상태 전이 및 입출고 이력 설계
+- 다품목 전체 롤백, 초과 입고/출고 차단, 중복 출고 단일 차감과 출고 취소 복원 구현
+- Spring Security 세션·CSRF, 4개 역할의 메뉴/API 권한, 계정 잠금과 감사 로그 구현
+- MyBatis JOIN·CTE·DENSE_RANK 집계와 원본 거래 대조, SQL EXPLAIN ANALYZE 인덱스 전후 실험
+- Java 통합·브라우저 검사, Testcontainers·GitHub Actions·Docker Compose 실행 환경 제공
+
+실제 회사에서 Java ERP를 운영한 경력으로 표현하지 않습니다. 프론트엔드 실무 경력 및 과거 직접 SQL 작성 경험과, 이 개인 프로젝트에서 새로 구현·검증한 Java/DB 역량을 구분합니다. SQL 성능 수치는 측정 조건을 함께 설명할 수 있을 때만 사용합니다. 외부 운영 배포·일별 배치는 완료했다고 쓰지 않습니다.

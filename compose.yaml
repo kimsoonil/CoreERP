@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: coreerp
+      POSTGRES_USER: coreerp
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - coreerp-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U coreerp -d coreerp"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  api:
+    build: ./backend
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/coreerp
+      DB_USER: coreerp
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      APP_ADMIN_PASSWORD: ${APP_ADMIN_PASSWORD:?Set APP_ADMIN_PASSWORD}
+      APP_DEMO_PASSWORD: ${APP_DEMO_PASSWORD:?Set APP_DEMO_PASSWORD}
+      SPRING_PROFILES_ACTIVE: ${APP_PROFILE:-demo}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  web:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8088}:8080"
+    depends_on:
+      - api
+    healthcheck:
+      test:
+        ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8080/api/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  benchmark:
+    profiles: ["tools"]
+    build:
+      context: .
+      dockerfile: tools/Dockerfile
+    environment:
+      DB_HOST: db
+      DB_NAME: coreerp_perf
+      DB_USER: coreerp
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - ./docs/evidence:/app/docs/evidence
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  coreerp-data:

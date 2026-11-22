@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.coreerp.CoreMapper">
+ <sql id="productWhere">
+    WHERE sku ILIKE #{q} ESCAPE '!'
+      OR name ILIKE #{q} ESCAPE '!'
+  </sql>
+ <select id="products" resultType="dev.coreerp.Models$Product">
+    SELECT *
+    FROM coreerp.products
+  <include refid="productWhere" />
+    ORDER BY id
+    LIMIT #{size}
+    OFFSET #{offset}
+  </select>
+ <select id="productCount" resultType="long">
+    SELECT count(*)
+    FROM coreerp.products
+  <include refid="productWhere" /></select>
+ <sql id="inventoryWhere">
+    WHERE (#{warehouse}::bigint IS NULL
+           OR i.warehouse_id=#{warehouse})
+      AND (p.sku ILIKE #{q} ESCAPE '!'
+           OR p.name ILIKE #{q} ESCAPE '!')
+  <if test="low">
+    AND i.on_hand-i.reserved &lt; p.safety_stock
+  </if></sql>
+ <select id="inventory" resultType="dev.coreerp.Models$Inventory">
+    SELECT i.*,
+           w.name warehouse_name,
+           p.sku,
+           p.name,
+           p.safety_stock
+    FROM coreerp.inventory i
+    JOIN coreerp.products p ON p.id=i.product_id
+    JOIN coreerp.warehouses w ON w.id=i.warehouse_id
+  <include refid="inventoryWhere" />
+    ORDER BY i.warehouse_id,
+             i.product_id
+    LIMIT #{size}
+    OFFSET #{offset}
+  </select>
+ <select id="inventoryCount" resultType="long">
+    SELECT count(*)
+    FROM coreerp.inventory i
+    JOIN coreerp.products p ON p.id=i.product_id
+  <include refid="inventoryWhere" /></select>
+ <sql id="purchase">
+    SELECT o.id,
+           o.supplier_id partner_id,
+           s.name partner_name,
+           o.warehouse_id,
+           w.name warehouse_name,
+           o.status,
+           o.actor,
+           o.created_at
+    FROM coreerp.purchase_orders o
+    JOIN coreerp.suppliers s ON s.id=o.supplier_id
+    JOIN coreerp.warehouses w ON w.id=o.warehouse_id
+  </sql>
+ <select id="purchase" resultType="dev.coreerp.Models$Document"><include refid="purchase" />
+    WHERE o.id=#{id}
+  </select>
+ <select id="lockPurchase" resultType="dev.coreerp.Models$Document"><include refid="purchase" />
+    WHERE o.id=#{id}
+      FOR
+      UPDATE OF o
+  </select>
+ <select id="purchases" resultType="dev.coreerp.Models$Document"><include refid="purchase" />
+    WHERE #{status}=''
+      OR o.status=#{status}
+    ORDER BY o.id DESC
+    LIMIT #{size}
+    OFFSET #{offset}
+  </select>
+ <sql id="sale">
+    SELECT o.id,
+           o.customer_id partner_id,
+           c.name partner_name,
+           o.warehouse_id,
+           w.name warehouse_name,
+           o.status,
+           o.actor,
+           o.created_at
+    FROM coreerp.sales_orders o
+    JOIN coreerp.customers c ON c.id=o.customer_id
+    JOIN coreerp.warehouses w ON w.id=o.warehouse_id
+  </sql>
+ <select id="sale" resultType="dev.coreerp.Models$Document"><include refid="sale" />
+    WHERE o.id=#{id}
+  </select>
+ <select id="lockSale" resultType="dev.coreerp.Models$Document"><include refid="sale" />
+    WHERE o.id=#{id}
+      FOR
+      UPDATE OF o
+  </select>
+ <select id="sales" resultType="dev.coreerp.Models$Document"><include refid="sale" />
+    WHERE #{status}=''
+      OR o.status=#{status}
+    ORDER BY o.id DESC
+    LIMIT #{size}
+    OFFSET #{offset}
+  </select>
+ <sql id="confirmedLines">
+    FROM coreerp.shipments s
+    JOIN coreerp.sales_orders o ON o.id=s.sales_order_id
+    JOIN coreerp.shipment_items si ON si.shipment_id=s.id
+    JOIN coreerp.sales_order_items oi ON oi.order_id=o.id
+    AND oi.product_id=si.product_id
+    WHERE s.status='CONFIRMED'
+      AND s.created_at &gt;= #{from}
+      AND s.created_at &lt; #{to}
+  </sql>
+ <select id="salesByPeriod" resultType="dev.coreerp.Models$SalesDay">
+    SELECT to_char(date_trunc(#{unit}, s.created_at AT TIME ZONE 'ASIA/SEOUL'), 'YYYY-MM-DD') period,
+           sum(oi.unit_price*si.quantity)::text amount,
+           count(DISTINCT s.id) shipments
+  <include refid="confirmedLines" />
+    GROUP BY 1
+    ORDER BY 1
+  </select>
+ <select id="productSales" resultType="dev.coreerp.Models$ProductSales">
+    WITH totals AS (
+    SELECT si.product_id,
+           sum(si.quantity)::bigint quantity,
+           sum(oi.unit_price*si.quantity) amount
+  <include refid="confirmedLines" />
+    GROUP BY si.product_id)
+    SELECT t.product_id,
+           p.sku,
+           p.name,
+           t.quantity,
+           t.amount::text,
+           dense_rank() OVER(
+                             ORDER BY t.amount DESC) rank
+    FROM totals t
+    JOIN coreerp.products p ON p.id=t.product_id
+    ORDER BY rank,
+             t.product_id
+    LIMIT 100
+  </select>
+ <select id="customerSales" resultType="dev.coreerp.Models$CustomerSales">
+    SELECT o.customer_id,
+           c.name,
+           sum(si.quantity)::bigint quantity,
+           sum(oi.unit_price*si.quantity)::text amount
+    FROM coreerp.shipments s
+    JOIN coreerp.sales_orders o ON o.id=s.sales_order_id
+    JOIN coreerp.customers c ON c.id=o.customer_id
+    JOIN coreerp.shipment_items si ON si.shipment_id=s.id
+    JOIN coreerp.sales_order_items oi ON oi.order_id=o.id
+    AND oi.product_id=si.product_id
+    WHERE s.status='CONFIRMED'
+      AND s.created_at &gt;= #{from}
+      AND s.created_at &lt; #{to}
+    GROUP BY o.customer_id,
+             c.name
+    ORDER BY sum(oi.unit_price*si.quantity) DESC
+    LIMIT 100
+  </select>
+ <select id="flowStats" resultType="dev.coreerp.Models$FlowStats">
+    WITH purchases AS
+      (SELECT to_char(o.created_at AT TIME ZONE 'ASIA/SEOUL','YYYY-MM-DD') AS "day",
+              count(DISTINCT o.id) purchases,
+              sum(i.quantity)::bigint ordered_quantity
+       FROM coreerp.purchase_orders o
+       JOIN coreerp.purchase_order_items i ON i.order_id=o.id
+       WHERE o.status!='CANCELLED'
+         AND o.created_at &gt;= #{from}
+         AND o.created_at &lt; #{to}
+       GROUP BY 1),
+         receipts AS
+      (SELECT to_char(g.created_at AT TIME ZONE 'ASIA/SEOUL','YYYY-MM-DD') AS "day",
+              count(DISTINCT g.id) receipts,
+              sum(i.quantity)::bigint receipt_quantity
+       FROM coreerp.goods_receipts g
+       JOIN coreerp.goods_receipt_items i ON i.receipt_id=g.id
+       WHERE g.created_at &gt;= #{from}
+         AND g.created_at &lt; #{to}
+       GROUP BY 1),
+         ships AS
+      (SELECT to_char(s.created_at AT TIME ZONE 'ASIA/SEOUL','YYYY-MM-DD') AS "day",
+              count(DISTINCT s.id) shipments,
+              sum(i.quantity)::bigint shipped_quantity
+       FROM coreerp.shipments s
+       JOIN coreerp.shipment_items i ON i.shipment_id=s.id
+       WHERE s.status='CONFIRMED'
+         AND s.created_at &gt;= #{from}
+         AND s.created_at &lt; #{to}
+       GROUP BY 1)
+    SELECT coalesce(r.day, s.day, p.day) AS "day",
+           coalesce(p.purchases, 0) purchases,
+           coalesce(p.ordered_quantity, 0) ordered_quantity,
+           coalesce(r.receipts, 0) receipts,
+           coalesce(r.receipt_quantity, 0) receipt_quantity,
+           coalesce(s.shipments, 0) shipments,
+           coalesce(s.shipped_quantity, 0) shipped_quantity
+    FROM receipts r
+    FULL JOIN ships s ON r.day=s.day
+    FULL JOIN purchases p ON p.day=coalesce(r.day, s.day)
+    ORDER BY 1
+  </select>
+</mapper>
