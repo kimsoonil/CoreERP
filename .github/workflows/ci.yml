@@ -98,6 +98,10 @@ jobs:
           docker compose up -d --build --wait --wait-timeout 180
           curl --fail http://127.0.0.1:8088/api/health
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8088/api/products)" = 401
+          curl --fail --location http://127.0.0.1:8088/swagger-ui.html -o /tmp/swagger.html
+          grep -q "Swagger UI" /tmp/swagger.html
+          curl --fail http://127.0.0.1:8088/v3/api-docs -o /tmp/coreerp-openapi.json
+          python3 -c 'import json; d=json.load(open("/tmp/coreerp-openapi.json")); assert "/api/auth/login" in d["paths"]; assert d["servers"][0]["url"] == "/"'
           docker compose down
 
   sql-performance:
