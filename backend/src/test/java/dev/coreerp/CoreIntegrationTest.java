@@ -520,4 +520,107 @@ class CoreIntegrationTest extends PostgresTestSupport {
             "SELECT count(*) FROM coreerp.audit_logs WHERE action='LOGIN_FAILURE'", Integer.class));
     assertFalse(db.audits(0, 100).toString().contains("test-admin-password"));
   }
+
+  @Test
+  void repeatedPurchaseLinesNormalizeAndReplayWithoutDuplicateDocuments() {
+    long p = product("NORMAL", 0);
+    var key = UUID.randomUUID();
+    long id =
+        business.createPurchase(
+            "purchase",
+            new PurchaseInput(
+                key, warehouse, supplier, List.of(new BuyLine(p, 2, 700), new BuyLine(p, 3, 700))));
+    assertEquals(
+        id,
+        business.createPurchase(
+            "purchase",
+            new PurchaseInput(key, warehouse, supplier, List.of(new BuyLine(p, 5, 700)))));
+    assertEquals(1, db.purchaseItems(id).size());
+    assertEquals(5, db.purchaseItems(id).getFirst().quantity());
+    assertEquals(1, count("purchase_orders"));
+  }
+
+  @Test
+  void conflictingPriceAndMergedQuantityLimitRejectWithoutWrites() {
+    long p = product("LIMIT", 0);
+    assertThrows(
+        BusinessException.class,
+        () ->
+            business.createPurchase(
+                "purchase",
+                new PurchaseInput(
+                    UUID.randomUUID(),
+                    warehouse,
+                    supplier,
+                    List.of(new BuyLine(p, 2, 700), new BuyLine(p, 3, 800)))));
+    assertThrows(
+        BusinessException.class,
+        () ->
+            business.createPurchase(
+                "purchase",
+                new PurchaseInput(
+                    UUID.randomUUID(),
+                    warehouse,
+                    supplier,
+                    List.of(new BuyLine(p, 600000, 700), new BuyLine(p, 600000, 700)))));
+    assertEquals(0, count("purchase_orders"));
+    assertEquals(0, count("requests"));
+  }
+
+  @Test
+  void duplicateSalesLinesReserveCombinedQuantityAndCancelOnlyOnce() {
+    long p = product("MERGED", 10);
+    long id =
+        business.createSale(
+            "sales",
+            new SalesInput(
+                UUID.randomUUID(), warehouse, customer, List.of(new Line(p, 2), new Line(p, 3))));
+    assertEquals(5, reserved(p));
+    assertEquals(1, db.saleItems(id).size());
+    business.cancelSale("sales", id);
+    business.cancelSale("sales", id);
+    assertEquals(0, reserved(p));
+    assertEquals(10, hand(p));
+    assertThrows(
+        BusinessException.class,
+        () -> business.ship("warehouse", id, new RequestKey(UUID.randomUUID())));
+  }
+
+  @Test
+  void latePurchaseCancellationIsRejectedWithoutChangingReceiptOrStock() {
+    long p = product("PART", 0), id = purchase(p, 10);
+    business.approve("purchase", id);
+    business.receive("warehouse", id, new ReceiptInput(UUID.randomUUID(), List.of(new Line(p, 4))));
+    assertThrows(BusinessException.class, () -> business.cancelPurchase("purchase", id));
+    assertThrows(BusinessException.class, () -> business.approve("purchase", id));
+    assertEquals("PARTIAL", db.purchase(id).status());
+    assertEquals(4, hand(p));
+    assertEquals(1, count("goods_receipts"));
+  }
+
+  @Test
+  void lastActiveAdminAndOversizeUtf8PasswordAreProtected() {
+    var admin = db.account("admin");
+    assertThrows(BusinessException.class, () -> users.status("admin", admin.id(), "LOCKED"));
+    assertEquals("ACTIVE", db.account("admin").status());
+    assertEquals(
+        "PASSWORD_TOO_LONG",
+        assertThrows(
+                BusinessException.class,
+                () -> users.create("admin", new UserInput("oversize", "가".repeat(25), "SALES")))
+            .code);
+    assertNull(db.account("oversize"));
+    assertFalse(users.list().isEmpty());
+  }
+
+  @Test
+  void disabledMasterRejectsNewOrderButPreservesHistoricalDetail() {
+    long p = product("HISTORY", 10), id = sale(p, 2);
+    masters.save("admin", CUSTOMERS, customer, new MasterInput("C1", "수정 고객사"));
+    masters.disable("admin", CUSTOMERS, customer);
+    assertThrows(BusinessException.class, () -> sale(p, 1));
+    assertEquals(2, reserved(p));
+    assertEquals("수정 고객사", business.saleDetail(id).order().partnerName());
+    assertEquals(1, count("sales_orders"));
+  }
 }

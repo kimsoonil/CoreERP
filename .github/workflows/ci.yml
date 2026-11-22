@@ -24,7 +24,9 @@ jobs:
         if: always()
         with:
           name: junit-reports
-          path: backend/target/surefire-reports
+          path: |
+            backend/target/surefire-reports
+            backend/target/site/jacoco
   frontend:
     runs-on: ubuntu-latest
     steps:
@@ -34,8 +36,13 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - run: npm ci && npm test && npm run build
+      - run: npm ci && npm run test:coverage && npm run build
         working-directory: frontend
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: react-coverage
+          path: frontend/coverage
   browser:
     runs-on: ubuntu-latest
     services:
