@@ -2,24 +2,24 @@
   "java": {
     "total": {
       "instruction": {
-        "covered": 3272,
+        "covered": 3319,
         "total": 4053,
-        "pct": 80.73
+        "pct": 81.89
       },
       "branch": {
-        "covered": 149,
+        "covered": 151,
         "total": 196,
-        "pct": 76.02
+        "pct": 77.04
       },
       "line": {
-        "covered": 524,
+        "covered": 530,
         "total": 626,
-        "pct": 83.71
+        "pct": 84.66
       },
       "complexity": {
-        "covered": 186,
+        "covered": 188,
         "total": 284,
-        "pct": 65.49
+        "pct": 66.2
       },
       "method": {
         "covered": 131,
@@ -62,24 +62,24 @@
       },
       "dev/coreerp/UserService": {
         "instruction": {
-          "covered": 110,
+          "covered": 143,
           "total": 151,
-          "pct": 72.85
+          "pct": 94.7
         },
         "branch": {
-          "covered": 6,
+          "covered": 7,
           "total": 10,
-          "pct": 60.0
+          "pct": 70.0
         },
         "line": {
-          "covered": 22,
+          "covered": 26,
           "total": 28,
-          "pct": 78.57
+          "pct": 92.86
         },
         "complexity": {
-          "covered": 7,
+          "covered": 8,
           "total": 11,
-          "pct": 63.64
+          "pct": 72.73
         },
         "method": {
           "covered": 6,
@@ -1050,24 +1050,24 @@
       },
       "dev/coreerp/Bootstrap": {
         "instruction": {
-          "covered": 53,
+          "covered": 67,
           "total": 113,
-          "pct": 46.9
+          "pct": 59.29
         },
         "branch": {
-          "covered": 5,
+          "covered": 6,
           "total": 12,
-          "pct": 41.67
+          "pct": 50.0
         },
         "line": {
-          "covered": 13,
+          "covered": 15,
           "total": 19,
-          "pct": 68.42
+          "pct": 78.95
         },
         "complexity": {
-          "covered": 3,
+          "covered": 4,
           "total": 9,
-          "pct": 33.33
+          "pct": 44.44
         },
         "method": {
           "covered": 3,
