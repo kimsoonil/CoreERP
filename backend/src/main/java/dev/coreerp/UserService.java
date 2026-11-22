@@ -11,10 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
   private final CoreMapper db;
   private final PasswordEncoder encoder;
+  private final com.fasterxml.jackson.databind.ObjectMapper json;
 
-  public UserService(CoreMapper db, PasswordEncoder e) {
+  public UserService(
+      CoreMapper db, PasswordEncoder e, com.fasterxml.jackson.databind.ObjectMapper json) {
     this.db = db;
     encoder = e;
+    this.json = json;
   }
 
   public List<UserView> list() {
@@ -35,7 +38,7 @@ public class UserService {
           "비밀번호는 UTF-8 기준 72바이트 이하여야 합니다.");
     long id = db.createUser(in.username(), encoder.encode(in.password()));
     db.userRole(id, in.role());
-    db.audit(actor, "USER_CREATE", "USER", id, "{}");
+    db.audit(actor, "USER_CREATE", "USER", id, details(Map.of("role", in.role())));
     return id;
   }
 
@@ -48,6 +51,14 @@ public class UserService {
         && db.roles(u.username()).contains("ADMIN")
         && db.activeAdmins() <= 1) throw BusinessException.conflict("마지막 활성 관리자는 잠글 수 없습니다.");
     db.userStatus(id, status);
-    db.audit(actor, "USER_STATUS", "USER", id, "{}");
+    db.audit(actor, "USER_STATUS", "USER", id, details(Map.of("from", u.status(), "to", status)));
+  }
+
+  private String details(Object value) {
+    try {
+      return json.writeValueAsString(value);
+    } catch (Exception e) {
+      throw new IllegalStateException(e);
+    }
   }
 }

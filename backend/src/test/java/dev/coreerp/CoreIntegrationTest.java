@@ -482,6 +482,13 @@ class CoreIntegrationTest extends PostgresTestSupport {
   void lockedAccountLosesExistingSessionAccess() throws Exception {
     long id = db.account("sales").id();
     users.status("admin", id, "LOCKED");
+    assertTrue(
+        db.audits(0, 100).stream()
+            .anyMatch(
+                a ->
+                    a.action().equals("USER_STATUS")
+                        && a.details().contains("LOCKED")
+                        && a.details().contains("ACTIVE")));
     mvc.perform(get("/api/products").with(user("sales").roles("SALES")))
         .andExpect(status().isUnauthorized())
         .andExpect(jsonPath("$.code").value("ACCOUNT_DISABLED"));
