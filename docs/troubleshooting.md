@@ -14,7 +14,7 @@
 
 ## GitHub 원격 검증
 
-[2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45028700948), 검증 코드 커밋 `fc16025`.
+[2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45034121606), 검증 코드 커밋 `42d1a00`.
 
 - backend: JUnit 35개를 Docker의 PostgreSQL 17 Testcontainers에서 실행.
 - frontend: TypeScript·Vite 빌드와 Vitest 4개 실행.
@@ -48,4 +48,4 @@
 
 ## 2차 일별 집계
 
-[집계 기준·API·권한·트랜잭션·장애 재처리 문서](daily-batch.md)를 참고하세요.
+[집계 기준·API·권한·트랜잭션·장애 재처리 문서](daily-batch.md)를 참고하세요. 전용 13개와 기존 V900 데이터의 V901 업그레이드 1개를 포함해 Java 35개를 검증했습니다. 집계 커밋 뒤 이력만 실패하면 결과가 이미 저장됐을 수 있으므로, 같은 날짜 재실행으로 이력을 복구한 뒤 상태를 확인합니다.
