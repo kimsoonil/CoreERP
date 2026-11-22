@@ -12,6 +12,18 @@
 | React·TypeScript 빌드 / Maven package | 통과                            |
 | SQL 벤치마크                          | 독립 DB 20만 행, 원본 계획 보관 |
 
+## GitHub 원격 검증
+
+[2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45028700948), 검증 코드 커밋 `fc16025`.
+
+- backend: JUnit 21개를 Docker의 PostgreSQL 17 Testcontainers에서 실행.
+- frontend: TypeScript·Vite 빌드와 Vitest 3개 실행.
+- browser: 별도 PostgreSQL 17 demo DB에서 Playwright 3개 업무 흐름 실행.
+- docker: 실제 이미지 빌드·Compose 3개 서비스 기동, 익명 API 401, Swagger UI 및 OpenAPI 인증 경로 접속 확인.
+- sql-performance: 별도 PostgreSQL 17의 20만 행 벤치마크 재현, 원본 JSON 아티팩트 보관.
+
+이 결과는 위 코드 커밋과 합성 데이터 조건에 대한 검증입니다. 운영 환경의 모든 장애나 부하 상황을 보장하지 않습니다.
+
 ## 다품목 트랜잭션 테스트
 
 입고·출고의 두 번째 품목 이력 INSERT에 PostgreSQL 트리거로 예외를 주입합니다. 예외 뒤 첫 품목 재고, 누적 입고/예약, 문서 상태, 입출고 문서와 감사 로그가 부분 반영되지 않았는지 확인합니다. 예외 주입은 테스트 전용 DB에만 생성하고 finally에서 제거합니다.
