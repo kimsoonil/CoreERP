@@ -14,7 +14,7 @@
 
 ## GitHub 원격 검증
 
-[2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45334487149), 검증 코드 커밋 `05a2318`.
+[2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45338960592), 검증 코드 커밋 `72e1496`.
 
 - backend: JUnit 52개를 Docker의 PostgreSQL 17 Testcontainers에서 실행.
 - frontend: TypeScript·Vite 빌드와 Vitest 61개 실행.
