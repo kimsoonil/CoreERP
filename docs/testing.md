@@ -22,9 +22,15 @@
 | api-client.test.ts | 세션 요청·CSRF 발급/재사용/로그인 후 갱신, 401 만료 통지와 다음 요청의 토큰 재발급, 업무/비JSON 오류, CSRF 실패 시 변경 차단 |
 | features/DailyBatch.test.tsx | 빈 결과와 기본 날짜, 실행 중 중복 클릭 방지, SKIPPED 문구, 실패 후 이력 갱신·재시도, 조회 오류, 상품·고객사 상세·닫기 |
 
-`frontend`에서 `npm ci && npm test`로 53개를 실행하고 `npm run build`로 TypeScript와 배포 빌드를 확인합니다. 컴포넌트 테스트는 실제 MUI·React Query 컴포넌트를 렌더링하며 API 경계만 모의 응답으로 대체합니다. 테스트마다 캐시를 격리하고 자동 재시도를 꺼 예상하지 못한 요청이 검사를 가리지 않게 합니다.
+`frontend`에서 `npm ci && npm test`로 61개를 실행하고 `npm run build`로 TypeScript와 배포 빌드를 확인합니다. 컴포넌트 테스트는 실제 MUI·React Query 컴포넌트를 렌더링하며 API 경계만 모의 응답으로 대체합니다. 테스트마다 캐시를 격리하고 자동 재시도를 꺼 예상하지 못한 요청이 검사를 가리지 않게 합니다.
 
 jsdom 검사는 실제 브라우저 레이아웃이나 DB 트랜잭션 검사를 대신하지 않습니다. `npm run test:e2e`의 Playwright 4개는 실행 중인 demo API·Vite와 합성 DB로 실제 업무 흐름·모바일 권한·1만 상품 페이지·일별 집계를 별도로 검사합니다. Vitest include는 src의 단위/컴포넌트 테스트만 포함해 Playwright와 분리합니다.
+
+## React 라인 95% 목표 보강
+
+8개를 추가해 Vitest 61개를 실행합니다. main.test.tsx는 실제 createRoot를 감싼 spy로 root 연결을 확인하고 실제 StrictMode·MUI 테마·QueryClient·BrowserRouter·App을 마운트합니다. 세션 조회 실패의 로그인 전환과 버튼 테마 적용까지 확인한 뒤 root를 unmount합니다.
+
+DailyBatch.test.tsx는 FAILED/ABANDONED만 재처리 버튼을 제공하는지, 선택 날짜 재처리, 조회 기간·새로 고침·실행 기준일, 상세 조회 오류·Escape 닫기를 추가했습니다. Documents.test.tsx는 발주·판매 취소 확인을 닫을 때 요청하지 않는지, 확정 요청과 상태 필터를 검사합니다. ManagementScreens.test.tsx는 상품 모달 취소·계정 잠금 해제 오류와 재시도·모달 닫기를 검사합니다. 모달 전환과 busy 종료는 UI가 실제 사용 가능해질 때까지 기다리며 고정 지연으로 넘기지 않습니다.
 
 ## React 라인 80% 목표 보강
 

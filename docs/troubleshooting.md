@@ -7,7 +7,7 @@
 | 검사                                  | 로컬 결과                       |
 | ------------------------------------- | ------------------------------- |
 | Java JUnit·MockMvc                    | 52개 통과                       |
-| Vitest                                | 53개 통과                        |
+| Vitest                                | 61개 통과                        |
 | Playwright                            | 4개 통과                        |
 | React·TypeScript 빌드 / Maven package | 통과                            |
 | SQL 벤치마크                          | 독립 DB 20만 행, 원본 계획 보관 |
@@ -17,7 +17,7 @@
 [2026-11-22 CI 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/45334487149), 검증 코드 커밋 `05a2318`.
 
 - backend: JUnit 52개를 Docker의 PostgreSQL 17 Testcontainers에서 실행.
-- frontend: TypeScript·Vite 빌드와 Vitest 53개 실행.
+- frontend: TypeScript·Vite 빌드와 Vitest 61개 실행.
 - browser: 별도 PostgreSQL 17 demo DB에서 Playwright 4개 업무 흐름 실행.
 - docker: 실제 이미지 빌드·Compose 3개 서비스 기동, 익명 API 401, Swagger UI 및 OpenAPI 인증 경로 접속 확인.
 - sql-performance: 별도 PostgreSQL 17의 20만 행 벤치마크 재현, 원본 JSON 아티팩트 보관.

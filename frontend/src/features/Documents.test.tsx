@@ -158,3 +158,57 @@ it("작성 중 발주에만 승인·취소를 제공하고 승인 확인을 취�
     screen.queryByRole("button", { name: "입고 확정" }),
   ).not.toBeInTheDocument();
 });
+
+it.each(["sales", "purchases"] as const)(
+  "%s 취소 확인을 닫으면 요청하지 않고 확정 시에만 취소하며 필터를 갱신한다",
+  async (type) => {
+    status = type === "purchases" ? "DRAFT" : "RESERVED";
+    const user = await mount(type);
+    const name = type === "purchases" ? "발주 취소" : "주문 취소";
+    await user.click(await screen.findByRole("button", { name }));
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(
+        screen.queryByRole("dialog", { name: name + " 확인" }),
+      ).not.toBeInTheDocument(),
+    );
+    expect(request.mock.calls.filter(([, b]) => b !== undefined)).toHaveLength(
+      0,
+    );
+    await user.click(await screen.findByRole("button", { name }));
+    await user.click(
+      within(screen.getByRole("dialog", { name: name + " 확인" })).getByRole(
+        "button",
+        { name: "확정" },
+      ),
+    );
+    await waitFor(() =>
+      expect(request).toHaveBeenCalledWith("/" + type + "/1/cancel", {}),
+    );
+    await waitFor(() =>
+      expect(
+        screen.queryByRole("dialog", { name: name + " 확인" }),
+      ).not.toBeInTheDocument(),
+    );
+    const detailDialog = await screen.findByRole("dialog", {
+      name: (type === "purchases" ? "발주" : "판매 주문") + " #1",
+    });
+    const close = within(detailDialog).getByRole("button", { name: "닫기" });
+    await waitFor(() => expect(close).toBeEnabled());
+    await user.click(close);
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    await user.click(
+      await screen.findByRole("combobox", { name: "상태 필터" }),
+    );
+    await user.click(screen.getByRole("option", { name: "취소" }));
+    await waitFor(() =>
+      expect(
+        request.mock.calls.some(([p]) =>
+          p.startsWith("/" + type + "?status=CANCELLED"),
+        ),
+      ).toBe(true),
+    );
+  },
+);

@@ -1,0 +1,1900 @@
+{
+  "java": {
+    "total": {
+      "instruction": {
+        "covered": 3319,
+        "total": 4053,
+        "pct": 81.89
+      },
+      "branch": {
+        "covered": 151,
+        "total": 196,
+        "pct": 77.04
+      },
+      "line": {
+        "covered": 530,
+        "total": 626,
+        "pct": 84.66
+      },
+      "complexity": {
+        "covered": 188,
+        "total": 284,
+        "pct": 66.2
+      },
+      "method": {
+        "covered": 131,
+        "total": 186,
+        "pct": 70.43
+      },
+      "class": {
+        "covered": 48,
+        "total": 51,
+        "pct": 94.12
+      }
+    },
+    "classes": {
+      "dev/coreerp/BatchConfiguration": {
+        "instruction": {
+          "covered": 5,
+          "total": 5,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 2,
+          "total": 2,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 2,
+          "total": 2,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 2,
+          "total": 2,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/UserService": {
+        "instruction": {
+          "covered": 143,
+          "total": 151,
+          "pct": 94.7
+        },
+        "branch": {
+          "covered": 7,
+          "total": 10,
+          "pct": 70.0
+        },
+        "line": {
+          "covered": 26,
+          "total": 28,
+          "pct": 92.86
+        },
+        "complexity": {
+          "covered": 8,
+          "total": 11,
+          "pct": 72.73
+        },
+        "method": {
+          "covered": 6,
+          "total": 6,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchModels$DayDetail": {
+        "instruction": {
+          "covered": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$SalesInput": {
+        "instruction": {
+          "covered": 15,
+          "total": 15,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Application": {
+        "instruction": {
+          "covered": 3,
+          "total": 8,
+          "pct": 37.5
+        },
+        "line": {
+          "covered": 1,
+          "total": 3,
+          "pct": 33.33
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 2,
+          "pct": 50.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 2,
+          "pct": 50.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models": {},
+      "dev/coreerp/ReportService": {
+        "instruction": {
+          "covered": 112,
+          "total": 112,
+          "pct": 100.0
+        },
+        "branch": {
+          "covered": 6,
+          "total": 6,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 17,
+          "total": 17,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 7,
+          "total": 7,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Movement": {
+        "instruction": {
+          "covered": 0,
+          "total": 27,
+          "pct": 0.0
+        },
+        "line": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "complexity": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "method": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "class": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        }
+      },
+      "dev/coreerp/Models$CustomerSales": {
+        "instruction": {
+          "covered": 15,
+          "total": 15,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchModels$Summary": {
+        "instruction": {
+          "covered": 42,
+          "total": 42,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Master": {
+        "instruction": {
+          "covered": 15,
+          "total": 15,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$BuyLine": {
+        "instruction": {
+          "covered": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/ApiController": {
+        "instruction": {
+          "covered": 18,
+          "total": 412,
+          "pct": 4.37
+        },
+        "line": {
+          "covered": 7,
+          "total": 60,
+          "pct": 11.67
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 43,
+          "pct": 2.33
+        },
+        "method": {
+          "covered": 1,
+          "total": 43,
+          "pct": 2.33
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchModels$DailyRequest": {
+        "instruction": {
+          "covered": 6,
+          "total": 6,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/CoreMapper": {},
+      "dev/coreerp/Models$Detail": {
+        "instruction": {
+          "covered": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$UserInput": {
+        "instruction": {
+          "covered": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BusinessService": {
+        "instruction": {
+          "covered": 1244,
+          "total": 1284,
+          "pct": 96.88
+        },
+        "branch": {
+          "covered": 90,
+          "total": 106,
+          "pct": 84.91
+        },
+        "line": {
+          "covered": 179,
+          "total": 183,
+          "pct": 97.81
+        },
+        "complexity": {
+          "covered": 58,
+          "total": 74,
+          "pct": 78.38
+        },
+        "method": {
+          "covered": 21,
+          "total": 21,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/DailySummaryScheduler": {
+        "instruction": {
+          "covered": 93,
+          "total": 93,
+          "pct": 100.0
+        },
+        "branch": {
+          "covered": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 20,
+          "total": 20,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 5,
+          "total": 5,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$ProductInput": {
+        "instruction": {
+          "covered": 15,
+          "total": 15,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/MasterService": {
+        "instruction": {
+          "covered": 181,
+          "total": 235,
+          "pct": 77.02
+        },
+        "branch": {
+          "covered": 10,
+          "total": 12,
+          "pct": 83.33
+        },
+        "line": {
+          "covered": 33,
+          "total": 39,
+          "pct": 84.62
+        },
+        "complexity": {
+          "covered": 13,
+          "total": 17,
+          "pct": 76.47
+        },
+        "method": {
+          "covered": 9,
+          "total": 11,
+          "pct": 81.82
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$UserView": {
+        "instruction": {
+          "covered": 18,
+          "total": 18,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Audit": {
+        "instruction": {
+          "covered": 24,
+          "total": 24,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$ReceiptInput": {
+        "instruction": {
+          "covered": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Account": {
+        "instruction": {
+          "covered": 18,
+          "total": 18,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/MasterService$Kind": {
+        "instruction": {
+          "covered": 32,
+          "total": 32,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 7,
+          "total": 7,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 2,
+          "total": 2,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 2,
+          "total": 2,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Page": {
+        "instruction": {
+          "covered": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/DailySummaryService": {
+        "instruction": {
+          "covered": 342,
+          "total": 379,
+          "pct": 90.24
+        },
+        "branch": {
+          "covered": 12,
+          "total": 20,
+          "pct": 60.0
+        },
+        "line": {
+          "covered": 61,
+          "total": 67,
+          "pct": 91.04
+        },
+        "complexity": {
+          "covered": 15,
+          "total": 22,
+          "pct": 68.18
+        },
+        "method": {
+          "covered": 11,
+          "total": 12,
+          "pct": 91.67
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$MasterInput": {
+        "instruction": {
+          "covered": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Item": {
+        "instruction": {
+          "covered": 21,
+          "total": 21,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Product": {
+        "instruction": {
+          "covered": 21,
+          "total": 21,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$RequestKey": {
+        "instruction": {
+          "covered": 6,
+          "total": 6,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/ApiErrors": {
+        "instruction": {
+          "covered": 83,
+          "total": 121,
+          "pct": 68.6
+        },
+        "branch": {
+          "covered": 1,
+          "total": 2,
+          "pct": 50.0
+        },
+        "line": {
+          "covered": 18,
+          "total": 28,
+          "pct": 64.29
+        },
+        "complexity": {
+          "covered": 8,
+          "total": 11,
+          "pct": 72.73
+        },
+        "method": {
+          "covered": 8,
+          "total": 10,
+          "pct": 80.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Adjustment": {
+        "instruction": {
+          "covered": 18,
+          "total": 18,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/DailySummaryMapper": {},
+      "dev/coreerp/BusinessException": {
+        "instruction": {
+          "covered": 17,
+          "total": 24,
+          "pct": 70.83
+        },
+        "line": {
+          "covered": 5,
+          "total": 6,
+          "pct": 83.33
+        },
+        "complexity": {
+          "covered": 2,
+          "total": 3,
+          "pct": 66.67
+        },
+        "method": {
+          "covered": 2,
+          "total": 3,
+          "pct": 66.67
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchModels$RunResult": {
+        "instruction": {
+          "covered": 15,
+          "total": 15,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Inventory": {
+        "instruction": {
+          "covered": 0,
+          "total": 27,
+          "pct": 0.0
+        },
+        "line": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "complexity": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "method": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "class": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        }
+      },
+      "dev/coreerp/SecurityConfig$1": {
+        "instruction": {
+          "covered": 58,
+          "total": 58,
+          "pct": 100.0
+        },
+        "branch": {
+          "covered": 8,
+          "total": 12,
+          "pct": 66.67
+        },
+        "line": {
+          "covered": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 4,
+          "total": 8,
+          "pct": 50.0
+        },
+        "method": {
+          "covered": 2,
+          "total": 2,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Bootstrap": {
+        "instruction": {
+          "covered": 67,
+          "total": 113,
+          "pct": 59.29
+        },
+        "branch": {
+          "covered": 6,
+          "total": 12,
+          "pct": 50.0
+        },
+        "line": {
+          "covered": 15,
+          "total": 19,
+          "pct": 78.95
+        },
+        "complexity": {
+          "covered": 4,
+          "total": 9,
+          "pct": 44.44
+        },
+        "method": {
+          "covered": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Receipt": {
+        "instruction": {
+          "covered": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Document": {
+        "instruction": {
+          "covered": 27,
+          "total": 27,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/ApiErrors$ErrorBody": {
+        "instruction": {
+          "covered": 18,
+          "total": 18,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$UserStatus": {
+        "instruction": {
+          "covered": 0,
+          "total": 6,
+          "pct": 0.0
+        },
+        "line": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "complexity": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "method": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        },
+        "class": {
+          "covered": 0,
+          "total": 1,
+          "pct": 0.0
+        }
+      },
+      "dev/coreerp/Models$Line": {
+        "instruction": {
+          "covered": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchModels": {},
+      "dev/coreerp/Models$PurchaseInput": {
+        "instruction": {
+          "covered": 15,
+          "total": 15,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/OpenApiConfig": {
+        "instruction": {
+          "covered": 186,
+          "total": 186,
+          "pct": 100.0
+        },
+        "branch": {
+          "covered": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 45,
+          "total": 45,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 8,
+          "total": 8,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 6,
+          "total": 6,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchController": {
+        "instruction": {
+          "covered": 23,
+          "total": 45,
+          "pct": 51.11
+        },
+        "line": {
+          "covered": 6,
+          "total": 8,
+          "pct": 75.0
+        },
+        "complexity": {
+          "covered": 3,
+          "total": 5,
+          "pct": 60.0
+        },
+        "method": {
+          "covered": 3,
+          "total": 5,
+          "pct": 60.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/BatchModels$Run": {
+        "instruction": {
+          "covered": 30,
+          "total": 30,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$SalesDay": {
+        "instruction": {
+          "covered": 12,
+          "total": 12,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$FlowStats": {
+        "instruction": {
+          "covered": 24,
+          "total": 24,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/SecurityConfig": {
+        "instruction": {
+          "covered": 214,
+          "total": 237,
+          "pct": 90.3
+        },
+        "branch": {
+          "covered": 3,
+          "total": 8,
+          "pct": 37.5
+        },
+        "line": {
+          "covered": 45,
+          "total": 48,
+          "pct": 93.75
+        },
+        "complexity": {
+          "covered": 16,
+          "total": 21,
+          "pct": 76.19
+        },
+        "method": {
+          "covered": 16,
+          "total": 17,
+          "pct": 94.12
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$Stock": {
+        "instruction": {
+          "covered": 9,
+          "total": 9,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "dev/coreerp/Models$ProductSales": {
+        "instruction": {
+          "covered": 21,
+          "total": 21,
+          "pct": 100.0
+        },
+        "line": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "complexity": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "method": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        },
+        "class": {
+          "covered": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      }
+    }
+  },
+  "react": {
+    "total": {
+      "lines": {
+        "total": 385,
+        "covered": 372,
+        "skipped": 0,
+        "pct": 96.62
+      },
+      "statements": {
+        "total": 409,
+        "covered": 394,
+        "skipped": 0,
+        "pct": 96.33
+      },
+      "functions": {
+        "total": 191,
+        "covered": 180,
+        "skipped": 0,
+        "pct": 94.24
+      },
+      "branches": {
+        "total": 340,
+        "covered": 310,
+        "skipped": 0,
+        "pct": 91.17
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "files": {
+      "src/App.tsx": {
+        "lines": {
+          "total": 39,
+          "covered": 39,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 22,
+          "covered": 22,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 49,
+          "covered": 49,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 20,
+          "covered": 19,
+          "skipped": 0,
+          "pct": 95
+        }
+      },
+      "src/api.ts": {
+        "lines": {
+          "total": 41,
+          "covered": 39,
+          "skipped": 0,
+          "pct": 95.12
+        },
+        "functions": {
+          "total": 11,
+          "covered": 11,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 47,
+          "covered": 45,
+          "skipped": 0,
+          "pct": 95.74
+        },
+        "branches": {
+          "total": 37,
+          "covered": 32,
+          "skipped": 0,
+          "pct": 86.48
+        }
+      },
+      "src/main.tsx": {
+        "lines": {
+          "total": 3,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 3,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "src/components/Common.tsx": {
+        "lines": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 10,
+          "covered": 8,
+          "skipped": 0,
+          "pct": 80
+        }
+      },
+      "src/components/RemoteSelect.tsx": {
+        "lines": {
+          "total": 12,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 9,
+          "covered": 9,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 14,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 85.71
+        },
+        "branches": {
+          "total": 11,
+          "covered": 8,
+          "skipped": 0,
+          "pct": 72.72
+        }
+      },
+      "src/components/ServerTable.tsx": {
+        "lines": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 5,
+          "covered": 5,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "src/components/useTask.ts": {
+        "lines": {
+          "total": 21,
+          "covered": 21,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 5,
+          "covered": 5,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 21,
+          "covered": 21,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 3,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "src/features/DailyBatch.tsx": {
+        "lines": {
+          "total": 46,
+          "covered": 46,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 24,
+          "covered": 24,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 49,
+          "covered": 49,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 36,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 91.66
+        }
+      },
+      "src/features/Dashboard.tsx": {
+        "lines": {
+          "total": 6,
+          "covered": 6,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 5,
+          "covered": 5,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 6,
+          "covered": 6,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "src/features/Documents.tsx": {
+        "lines": {
+          "total": 83,
+          "covered": 80,
+          "skipped": 0,
+          "pct": 96.38
+        },
+        "functions": {
+          "total": 41,
+          "covered": 38,
+          "skipped": 0,
+          "pct": 92.68
+        },
+        "statements": {
+          "total": 84,
+          "covered": 81,
+          "skipped": 0,
+          "pct": 96.42
+        },
+        "branches": {
+          "total": 105,
+          "covered": 98,
+          "skipped": 0,
+          "pct": 93.33
+        }
+      },
+      "src/features/Inventory.tsx": {
+        "lines": {
+          "total": 30,
+          "covered": 27,
+          "skipped": 0,
+          "pct": 90
+        },
+        "functions": {
+          "total": 14,
+          "covered": 11,
+          "skipped": 0,
+          "pct": 78.57
+        },
+        "statements": {
+          "total": 31,
+          "covered": 28,
+          "skipped": 0,
+          "pct": 90.32
+        },
+        "branches": {
+          "total": 12,
+          "covered": 9,
+          "skipped": 0,
+          "pct": 75
+        }
+      },
+      "src/features/Login.tsx": {
+        "lines": {
+          "total": 6,
+          "covered": 6,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 6,
+          "covered": 6,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "src/features/Masters.tsx": {
+        "lines": {
+          "total": 34,
+          "covered": 34,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 18,
+          "covered": 18,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 34,
+          "covered": 34,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 58,
+          "covered": 53,
+          "skipped": 0,
+          "pct": 91.37
+        }
+      },
+      "src/features/Operations.tsx": {
+        "lines": {
+          "total": 38,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 86.84
+        },
+        "functions": {
+          "total": 22,
+          "covered": 17,
+          "skipped": 0,
+          "pct": 77.27
+        },
+        "statements": {
+          "total": 38,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 86.84
+        },
+        "branches": {
+          "total": 29,
+          "covered": 28,
+          "skipped": 0,
+          "pct": 96.55
+        }
+      },
+      "src/features/Reports.tsx": {
+        "lines": {
+          "total": 18,
+          "covered": 18,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 12,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 19,
+          "covered": 19,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 10,
+          "covered": 10,
+          "skipped": 0,
+          "pct": 100
+        }
+      }
+    }
+  }
+}

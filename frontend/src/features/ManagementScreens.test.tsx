@@ -377,3 +377,78 @@ it("입출고 통계는 변경한 날짜 범위로 조회한다", async () => {
     ).toBe(true),
   );
 });
+
+it("상품 등록·수정과 사용 중지 모달을 취소하면 변경 요청을 보내지 않는다", async () => {
+  const user = mount(<Masters type="products" user={admin} />);
+  await user.click(screen.getByRole("button", { name: "등록" }));
+  await user.click(
+    within(screen.getByRole("dialog")).getByRole("button", { name: "닫기" }),
+  );
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  await user.click(screen.getByRole("button", { name: "수정" }));
+  await user.keyboard("{Escape}");
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  await user.click(screen.getByRole("button", { name: "사용 중지" }));
+  await user.keyboard("{Escape}");
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  await user.click(screen.getByRole("button", { name: "사용 중지" }));
+  await user.click(
+    within(screen.getByRole("dialog")).getByRole("button", { name: "닫기" }),
+  );
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  expect(
+    request.mock.calls.some(([, b, m]) => b !== undefined || m === "DELETE"),
+  ).toBe(false);
+});
+it("잠긴 계정의 활성화 실패는 모달에 표시하고 같은 상태 변경을 재시도한다", async () => {
+  const previous = request.getMockImplementation()!;
+  request.mockImplementation(async (path, body, method) =>
+    path === "/users" && body === undefined
+      ? [
+          {
+            id: 2,
+            username: "locked_member",
+            roles: ["SALES"],
+            status: "LOCKED",
+            lastLoginAt: null,
+          },
+        ]
+      : previous(path, body, method),
+  );
+  change = async () => {
+    throw new ApiError("상태 변경 실패", 500, "FAILED");
+  };
+  const user = mount(<Operations type="users" user={admin} />);
+  await user.click(await screen.findByRole("button", { name: "잠금 해제" }));
+  const dialog = screen.getByRole("dialog", { name: "계정 상태 변경" });
+  await user.click(within(dialog).getByRole("button", { name: "확정" }));
+  expect(await within(dialog).findByText("상태 변경 실패")).toBeVisible();
+  change = async () => ({});
+  await user.click(within(dialog).getByRole("button", { name: "확정" }));
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  expect(request).toHaveBeenCalledWith(
+    "/users/2/status",
+    { status: "ACTIVE" },
+    "PATCH",
+  );
+  await user.click(screen.getByRole("button", { name: "사용자 생성" }));
+  await user.keyboard("{Escape}");
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  await user.click(screen.getByRole("button", { name: "잠금 해제" }));
+  await user.keyboard("{Escape}");
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+});
