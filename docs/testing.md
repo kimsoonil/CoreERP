@@ -12,7 +12,7 @@
 | ReportServiceTest | KST 포함 시작/제외 종료, 연도·윤년 경계, 최대 366일, 역전·초과 기간 및 잘못된 집계 단위 차단 |
 | DailySummarySchedulerTest | 오래된 날짜 우선 처리, 어제 중복 제거, BUSY 시 나머지 연기, 실패 날짜의 다음 트리거 재시도 |
 
-`backend`에서 `./mvnw verify`로 52개를 실행합니다. Docker가 있으면 PostgreSQL 17 Testcontainers가 자동 기동됩니다. 단위 테스트만 실행하려면 `./mvnw -Dtest=ReportServiceTest,DailySummarySchedulerTest test`를 사용합니다.
+`backend`에서 `./mvnw verify`로 53개를 실행합니다. Docker가 있으면 PostgreSQL 17 Testcontainers가 자동 기동됩니다. 단위 테스트만 실행하려면 `./mvnw -Dtest=ReportServiceTest,DailySummarySchedulerTest test`를 사용합니다.
 
 ## React — Vitest·Testing Library·jsdom
 
@@ -49,3 +49,9 @@ CoreIntegrationTest에 중복 품목·단가·수량 상한·부분 입고 상�
 ## CI
 
 기존 backend·frontend 작업에서 새 테스트도 함께 실행합니다. browser·docker·sql-performance 작업은 실제 브라우저, Compose 기동 및 SQL 측정을 별도로 유지합니다. 성공한 실행은 README와 troubleshooting의 Actions 링크로 확인합니다.
+
+## 2026-11-28 — 업무 시연 검증 보강
+
+Java에 출고·예약 취소 동시 경합 테스트를 추가했습니다. 시작 장벽과 별도 스레드의 실제 트랜잭션으로 12회 실행하며 한쪽만 성공하고 문서·재고·감사 기록이 일치하는지 확인합니다.
+
+기존 브라우저 업무 테스트에는 출고 전 매출 기준값, 출고 후 +3,000원·출고 +1건·상품 수량 3개, 화면의 상품 매출, 출고 취소 후 기준값 원복을 추가했습니다. 테스트 개수는 4개 그대로이며 검사 내용을 보강했습니다. 날짜는 UTC가 아니라 API와 같은 KST를 사용합니다. 발주 입력·부분 입고·출고 후 매출 화면을 추가 저장합니다. [시연 가이드](demo-walkthrough.md)를 참고하세요.

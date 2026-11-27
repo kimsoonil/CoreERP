@@ -31,6 +31,19 @@ test("상품 등록 → 발주 승인 → 두 차례 부분 입고 → 판매 �
   const sku = "E2E-" + Date.now(),
     name = "브라우저 검증 부품";
   await login(page);
+  const period = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Asia/Seoul",
+  }).format(new Date());
+  async function salesToday() {
+    const response = await page.request.get(
+      `/api/reports/sales?from=${period}&to=${period}&unit=day`,
+    );
+    expect(response.ok()).toBeTruthy();
+    return response.json();
+  }
+  const baseline = await salesToday();
+  const baselineAmount = BigInt(baseline.periods[0]?.amount || "0");
+  const baselineShipments = baseline.periods[0]?.shipments || 0;
   await page.getByRole("link", { name: "상품 관리", exact: true }).click();
   await page.getByRole("button", { name: "등록", exact: true }).click();
   await page.getByRole("textbox", { name: "SKU", exact: true }).fill(sku);
@@ -46,6 +59,10 @@ test("상품 등록 → 발주 승인 → 두 차례 부분 입고 → 판매 �
   await page
     .getByRole("spinbutton", { name: name + " 수량", exact: true })
     .fill("10");
+  await page.screenshot({
+    path: "test-results/coreerp-purchase-form.png",
+    fullPage: true,
+  });
   await page.getByRole("button", { name: "발주 저장", exact: true }).click();
   await expect(
     page.getByRole("dialog").getByText("작성 중", { exact: true }),
@@ -59,6 +76,10 @@ test("상품 등록 → 발주 승인 → 두 차례 부분 입고 → 판매 �
   await expect(
     page.getByRole("dialog").getByText("부분 입고", { exact: true }),
   ).toBeVisible();
+  await page.screenshot({
+    path: "test-results/coreerp-partial-receipt.png",
+    fullPage: true,
+  });
   await page
     .getByRole("spinbutton", { name: name + " 입고 수량", exact: true })
     .fill("6");
@@ -78,7 +99,11 @@ test("상품 등록 → 발주 승인 → 두 차례 부분 입고 → 판매 �
   await page
     .getByRole("spinbutton", { name: name + " 수량", exact: true })
     .fill("3");
+  const createdSale = page.waitForResponse(
+    (r) => r.url().endsWith("/api/sales") && r.request().method() === "POST",
+  );
   await page.getByRole("button", { name: "주문 예약", exact: true }).click();
+  const saleId = (await (await createdSale).json()).id;
   await expect(
     page.getByRole("dialog").getByText("재고 예약", { exact: true }),
   ).toBeVisible();
@@ -91,6 +116,28 @@ test("상품 등록 → 발주 승인 → 두 차례 부분 입고 → 판매 �
     path: "test-results/coreerp-shipment.png",
     fullPage: true,
   });
+  const confirmed = await salesToday();
+  expect(BigInt(confirmed.periods[0].amount)).toBe(baselineAmount + 3000n);
+  expect(confirmed.periods[0].shipments).toBe(baselineShipments + 1);
+  expect(
+    confirmed.products.find((p: { sku: string }) => p.sku === sku),
+  ).toMatchObject({ quantity: 3, amount: "3000" });
+  // Visit the real report before cancellation, so the evidence contains this sale.
+  await page.getByRole("button", { name: "닫기", exact: true }).click();
+  await page.getByRole("link", { name: "매출 분석", exact: true }).click();
+  await page.getByLabel("시작일", { exact: true }).fill(period);
+  await page.getByLabel("종료일", { exact: true }).fill(period);
+  await expect(page.getByRole("row").filter({ hasText: name })).toContainText(
+    "3,000",
+  );
+  await page.screenshot({
+    path: "test-results/coreerp-confirmed-sales.png",
+    fullPage: true,
+  });
+  await page.goBack();
+  await page
+    .getByRole("button", { name: "주문 " + saleId + " 상세", exact: true })
+    .click();
   await page.getByRole("button", { name: "출고 취소", exact: true }).click();
   await page.getByRole("button", { name: "확정", exact: true }).click();
   await expect(
@@ -114,10 +161,27 @@ test("상품 등록 → 발주 승인 → 두 차례 부분 입고 → 판매 �
     path: "test-results/coreerp-sales.png",
     fullPage: true,
   });
-  await page.getByRole("link", {name:"발주·입출고 통계",exact:true}).click();
-  await expect(page.getByRole("columnheader", {name:"발주 건수",exact:true})).toBeVisible();
-  const period=new Date().toISOString().slice(0,10);
-  expect((await page.request.get("/api/reports/flows?from="+period+"&to="+period)).status()).toBe(200);
+  await page
+    .getByRole("link", { name: "발주·입출고 통계", exact: true })
+    .click();
+  await expect(
+    page.getByRole("columnheader", { name: "발주 건수", exact: true }),
+  ).toBeVisible();
+  const cancelledReport = await salesToday();
+  expect(BigInt(cancelledReport.periods[0]?.amount || "0")).toBe(
+    baselineAmount,
+  );
+  expect(cancelledReport.periods[0]?.shipments || 0).toBe(baselineShipments);
+  expect(
+    cancelledReport.products.some((p: { sku: string }) => p.sku === sku),
+  ).toBe(false);
+  expect(
+    (
+      await page.request.get(
+        "/api/reports/flows?from=" + period + "&to=" + period,
+      )
+    ).status(),
+  ).toBe(200);
 });
 test("창고 담당자의 메뉴와 API 권한·모바일 레이아웃", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -130,8 +194,12 @@ test("창고 담당자의 메뉴와 API 권한·모바일 레이아웃", async (
     page.getByRole("button", { name: "발주서 생성", exact: true }),
   ).toHaveCount(0);
   expect((await page.request.get("/api/users")).status()).toBe(403);
-  await expect(page.getByRole("link",{name:"일별 집계 배치",exact:true})).toHaveCount(0);
-  expect((await page.request.get("/api/batches/daily/runs")).status()).toBe(403);
+  await expect(
+    page.getByRole("link", { name: "일별 집계 배치", exact: true }),
+  ).toHaveCount(0);
+  expect((await page.request.get("/api/batches/daily/runs")).status()).toBe(
+    403,
+  );
   await page.screenshot({
     path: "test-results/coreerp-mobile.png",
     fullPage: true,

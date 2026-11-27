@@ -325,6 +325,60 @@ class CoreIntegrationTest extends PostgresTestSupport {
   }
 
   @Test
+  void shipmentRacingReservationCancellationHasOneTerminalOutcome() throws Exception {
+    long p = product("RACE", 10);
+    // Separate transactions compete for the same order row; either winner is valid.
+    try (var pool = Executors.newFixedThreadPool(2)) {
+      for (int attempt = 0; attempt < 12; attempt++) {
+        long id = sale(p, 3);
+        var start = new CyclicBarrier(2);
+        Callable<Boolean> ship =
+            () -> {
+              start.await(5, TimeUnit.SECONDS);
+              try {
+                business.ship("warehouse", id, new RequestKey(UUID.randomUUID()));
+                return true;
+              } catch (BusinessException e) {
+                return false;
+              }
+            };
+        Callable<Boolean> cancel =
+            () -> {
+              start.await(5, TimeUnit.SECONDS);
+              try {
+                business.cancelSale("sales", id);
+                return true;
+              } catch (BusinessException e) {
+                return false;
+              }
+            };
+        var shipped = pool.submit(ship);
+        var cancelled = pool.submit(cancel);
+        boolean didShip = shipped.get(10, TimeUnit.SECONDS);
+        assertNotEquals(didShip, cancelled.get(10, TimeUnit.SECONDS));
+        assertEquals(didShip ? "SHIPPED" : "CANCELLED", business.saleDetail(id).order().status());
+        assertEquals(0, reserved(p));
+        assertEquals(didShip ? 7 : 10, hand(p));
+        assertEquals(
+            didShip ? 1 : 0,
+            sql.queryForObject(
+                "SELECT count(*) FROM coreerp.shipments WHERE sales_order_id=?",
+                Integer.class,
+                id));
+        assertEquals(
+            didShip ? 1 : 0,
+            sql.queryForObject(
+                "SELECT count(*) FROM coreerp.audit_logs WHERE entity_id=? AND"
+                    + " action='SHIP_CONFIRM'",
+                Integer.class,
+                id));
+        if (didShip) business.cancelShipment("warehouse", id);
+        assertEquals(10, hand(p));
+      }
+    }
+  }
+
+  @Test
   void warehousesNeverBorrowStockFromEachOther() {
     long p = product("A", 20),
         other = masters.save("admin", WAREHOUSES, null, new MasterInput("W2", "분리 창고"));
