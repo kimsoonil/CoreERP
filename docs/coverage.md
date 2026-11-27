@@ -4,7 +4,7 @@
 
 Java 53개·React 61개·브라우저 4개, 총 118개를 통과했습니다. 빈 전용 PostgreSQL 18.7 DB에서 Java 21로 다시 측정한 결과 Java 라인 **84.66%(530/626)**·분기 **77.04%(151/196)**, React V8 라인 **96.62%(372/385)**·분기 **91.17%(310/340)**입니다. 기존 포함/제외 범위를 유지했습니다. 업무 소스는 변경하지 않고 출고·예약 취소 경합과 브라우저 매출 대조를 보강했으므로 커버리지 수치는 동일합니다. 프런트 빌드와 Java verify가 통과했습니다.
 
-[현재 원본 카운터](evidence/coverage-workflow.json) · [시연과 재현](demo-walkthrough.md). 로컬에서는 Docker가 없어 임시 PostgreSQL을 사용했고, CI는 PostgreSQL 17·Testcontainers로 별도 검증합니다. 브라우저는 커버리지에 합산하지 않습니다.
+[현재 검증 코드 2317718의 CI 5개 작업 성공](https://github.com/kimsoonil/CoreERP/actions/runs/46029086322) · [현재 원본 카운터](evidence/coverage-workflow.json) · [시연과 재현](demo-walkthrough.md). 로컬에서는 Docker가 없어 임시 PostgreSQL을 사용했고, CI는 PostgreSQL 17·Testcontainers로 별도 검증합니다. 브라우저는 커버리지에 합산하지 않습니다.
 
 ## 이전 결과 — 부트스트랩·모달·오류·배치 재처리, 95% 목표
 
