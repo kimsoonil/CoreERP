@@ -73,3 +73,7 @@ npm run check:operations
 ## 여전히 남은 점
 
 WAL 기반 시점 복구(PITR), 외부 백업 보관·암호화, 복원 반복 실습과 RTO/RPO 목표, 서버 강제 종료·failover, 장시간 soak/증가 부하·포화점·다중 사용자 세션·인터넷 지연·TLS 비용은 미검증입니다. 운영 배포 전 상태를 유지합니다.
+
+## 같은 변경의 일반 회귀 검증
+
+[코드 1afe3bd의 GitHub Actions](https://github.com/kimsoonil/CoreERP/actions/runs/46146502601)에서 backend·frontend·browser·docker·sql-performance 5개 작업이 모두 성공했습니다. 위 로컬 장애·복원·부하 실험이 이 CI에서 자동 수행됐다는 뜻은 아닙니다.
