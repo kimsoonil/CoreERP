@@ -24,6 +24,10 @@
 
 [백업·복원·연결 장애·HTTP 부하 실험](docs/local-operations.md)을 일회용 합성 DB에서 실행했습니다. 25개 테이블·시퀀스 복원 일치, 복원 API 로그인·매출 대조, 출고 중 DB 연결 종료 후 전체 롤백과 동일 키 재시도, 30초 조회 부하 및 재고 경합을 확인했습니다. [실행 도구](tools/operations-check.mjs) · [원본 측정 JSON](docs/evidence/local-operations.json). 실제 운영 성능·서버 failover·RTO/RPO 검증은 아닙니다. **운영 배포 전입니다.**
 
+## WAL 복구·전체 서비스 장애·15분 혼합 부하
+
+[실제 검증 결과와 재현](docs/recovery-soak.md): 물리 기본 백업·WAL로 거래 A 이후/B 이전의 이름 있는 지점 복구, API·PostgreSQL 전체 프로세스 종료 후 커밋 보존·진행 중 출고 롤백·동일 키 재시도를 확인했습니다. 독립 세션 8개의 15분 혼합 부하는 143,481건 모두 성공, 전체 p95 11.23ms, 주문·출고·취소 8,618사이클 후 재고 정합성을 통과했습니다. 분별 p95 증가와 자원 표본·한계도 공개합니다. [원본 JSON](docs/evidence/recovery-soak.json) · [요청별 CSV(gzip)](docs/evidence/recovery-soak-samples.csv.gz). 물리 서버 전원 차단·원격 백업·다중 노드 failover·24시간 부하 검증과 운영 배포는 하지 않았습니다.
+
 ## 기술 구성
 
 - Frontend: React·TypeScript·Vite, MUI / MUI DataGrid, TanStack Query(React Query), React Hook Form, React Router

@@ -59,3 +59,7 @@ Java에 출고·예약 취소 동시 경합 테스트를 추가했습니다. 시
 ## 로컬 운영 실험 — 기본 CI와 분리
 
 2026-11-28, [운영 검증 도구](../tools/operations-check.mjs)로 실제 논리 백업/새 DB 복원, 출고 중 DB 연결 종료·롤백·동일 키 재시도, 30초 HTTP 조회 부하·재고 주문/중복 출고 경합을 검사했습니다. [실제 측정값과 한계](local-operations.md)를 확인하세요. 기존 JUnit·Vitest·Playwright 118개와는 별도 실험이며 테스트 개수에 합산하지 않았습니다.
+
+## WAL 복구·프로세스 장애·15분 부하
+
+[recovery-soak.mjs](../tools/recovery-soak.mjs)는 새 임시 클러스터를 직접 생성하며 기존 DB 주소를 받지 않습니다. 물리 기본 백업·WAL 목표 복구, PostgreSQL immediate 종료·Java SIGKILL 후 복구, 독립 세션 8개의 15분 혼합 부하와 마지막 재고 불변식을 검사했습니다. [실측·원본 CSV·재현](recovery-soak.md). 일반 CI 118개와 별도이며 개수를 부풀려 합산하지 않습니다.
