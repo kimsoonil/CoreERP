@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "benchmark": "node benchmark.mjs"
+    "benchmark": "node benchmark.mjs",
+    "check:operations": "node operations-check.mjs"
   },
   "dependencies": {
     "pg": "^8.16.0"

@@ -20,6 +20,10 @@
 
 [발주부터 매출 집계까지 5분 시연](docs/demo-walkthrough.md)에서 입력 순서·단계별 재고·매출 예상값과 실제 실행 화면을 볼 수 있습니다. [SQL·동시성 설계](docs/sql-concurrency.md)는 행 잠금·요청 중복·출고/취소 경합을 코드와 테스트에 연결합니다. [운영 준비 문서](docs/operations.md)는 장애 재처리와 미검증 운영 항목을 구분합니다. **운영 배포 전 상태를 유지합니다.**
 
+## 로컬 운영 검증
+
+[백업·복원·연결 장애·HTTP 부하 실험](docs/local-operations.md)을 일회용 합성 DB에서 실행했습니다. 25개 테이블·시퀀스 복원 일치, 복원 API 로그인·매출 대조, 출고 중 DB 연결 종료 후 전체 롤백과 동일 키 재시도, 30초 조회 부하 및 재고 경합을 확인했습니다. [실행 도구](tools/operations-check.mjs) · [원본 측정 JSON](docs/evidence/local-operations.json). 실제 운영 성능·서버 failover·RTO/RPO 검증은 아닙니다. **운영 배포 전입니다.**
+
 ## 기술 구성
 
 - Frontend: React·TypeScript·Vite, MUI / MUI DataGrid, TanStack Query(React Query), React Hook Form, React Router
