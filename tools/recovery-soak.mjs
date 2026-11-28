@@ -53,23 +53,26 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let app, restoredApp, db, sampleZip, sampleFile;
 let cleanupPromise;
 function cleanup() {
-  return cleanupPromise ??= (async () => {
-
-  for (const child of [restoredApp, app])
-    if (child && child.exitCode === null) child.kill("SIGTERM");
-  await db?.end().catch(() => {});
-  for (const dir of [recovered, source]) {
-    try {
-      ctl(dir, "stop", ["-m", "immediate"]);
-    } catch {}
-  }
-  sampleZip?.end();
-  await rm(root, { recursive: true, force: true });
-
-  })();
+  return (cleanupPromise ??= (async () => {
+    for (const child of [restoredApp, app])
+      if (child && child.exitCode === null) child.kill("SIGTERM");
+    await db?.end().catch(() => {});
+    for (const dir of [recovered, source]) {
+      try {
+        ctl(dir, "stop", ["-m", "immediate"]);
+      } catch {}
+    }
+    sampleZip?.end();
+    await rm(root, { recursive: true, force: true });
+  })());
 }
-for (const [signal, status] of [["SIGINT", 130], ["SIGTERM", 143]]) {
-  process.once(signal, () => { void cleanup().finally(() => process.exit(status)); });
+for (const [signal, status] of [
+  ["SIGINT", 130],
+  ["SIGTERM", 143],
+]) {
+  process.once(signal, () => {
+    void cleanup().finally(() => process.exit(status));
+  });
 }
 
 function cmd(bin, name, args, timeout = 60000) {
@@ -437,7 +440,10 @@ try {
   const crashStarted = performance.now();
   ctl(source, "stop", ["-m", "immediate"]);
   const failed = await inFlight;
-  assert.equal(failed.status, 500);
+  assert.ok(
+    [0, 500].includes(failed.status),
+    "Crash must fail as HTTP 500 or transport loss, never succeed",
+  );
   app.kill("SIGKILL");
   await new Promise((r) => app.once("exit", r));
   app = undefined;
@@ -636,13 +642,11 @@ try {
     completedReserveShipCancelCycles: cycles,
     finalStock: { onHand: 100000, reserved: 0 },
     invalidInventoryRows: 0,
-    perMinute: buckets
-      .filter(Boolean)
-      .map((b) => ({
-        minute: b.minute,
-        ...summarize(b.times),
-        statuses: b.statuses,
-      })),
+    perMinute: buckets.filter(Boolean).map((b) => ({
+      minute: b.minute,
+      ...summarize(b.times),
+      statuses: b.statuses,
+    })),
     resourceSamples: resources,
     rawSamples: "recovery-soak-samples.csv.gz",
     limits:

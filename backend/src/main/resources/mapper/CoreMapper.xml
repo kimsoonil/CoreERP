@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.coreerp.CoreMapper">
  <sql id="productWhere">
-    WHERE sku ILIKE #{q} ESCAPE '!'
-      OR name ILIKE #{q} ESCAPE '!'
-  </sql>
+  <where>
+   <if test="q != &quot;%&quot;">
+    sku ILIKE #{q} ESCAPE '!' OR name ILIKE #{q} ESCAPE '!'
+   </if>
+  </where>
+ </sql>
  <select id="products" resultType="dev.coreerp.Models$Product">
     SELECT *
     FROM coreerp.products
@@ -18,13 +21,12 @@
     FROM coreerp.products
   <include refid="productWhere" /></select>
  <sql id="inventoryWhere">
-    WHERE (#{warehouse}::bigint IS NULL
-           OR i.warehouse_id=#{warehouse})
-      AND (p.sku ILIKE #{q} ESCAPE '!'
-           OR p.name ILIKE #{q} ESCAPE '!')
-  <if test="low">
-    AND i.on_hand-i.reserved &lt; p.safety_stock
-  </if></sql>
+  <where>
+   <if test="warehouse != null">i.warehouse_id=#{warehouse}</if>
+   <if test="q != &quot;%&quot;">AND (p.sku ILIKE #{q} ESCAPE '!' OR p.name ILIKE #{q} ESCAPE '!')</if>
+   <if test="low">AND i.on_hand-i.reserved &lt; p.safety_stock</if>
+  </where>
+ </sql>
  <select id="inventory" resultType="dev.coreerp.Models$Inventory">
     SELECT i.*,
            w.name warehouse_name,
@@ -43,7 +45,9 @@
  <select id="inventoryCount" resultType="long">
     SELECT count(*)
     FROM coreerp.inventory i
+   <if test="q != &quot;%&quot; or low">
     JOIN coreerp.products p ON p.id=i.product_id
+   </if>
   <include refid="inventoryWhere" /></select>
  <sql id="purchase">
     SELECT o.id,

@@ -379,6 +379,25 @@ class CoreIntegrationTest extends PostgresTestSupport {
   }
 
   @Test
+  void inventoryEmptySearchMatchesFilteredCountsAndRetainsHistoricalProducts() {
+    long a = product("EMPTY-A", 3), b = product("EMPTY-B", 10);
+    long second = masters.save("admin", WAREHOUSES, null, new MasterInput("W2", "별도 창고"));
+    business.adjust("admin", new Adjustment(UUID.randomUUID(), second, a, 8, "검색 검증"));
+    assertEquals(3, masters.inventory(null, "", false, 0, 25).total());
+    assertEquals(2, masters.inventory(warehouse, "", false, 0, 25).total());
+    assertEquals(1, masters.inventory(null, "", true, 0, 25).total());
+    assertEquals(1, masters.inventory(warehouse, "EMPTY-A", false, 0, 25).total());
+    assertEquals(0, masters.inventory(null, "%", false, 0, 25).total());
+    assertEquals(0, masters.inventory(null, "_", false, 0, 25).total());
+    assertEquals(0, masters.inventory(null, "!", false, 0, 25).total());
+    masters.disableProduct("admin", b);
+    assertEquals(2, masters.products("", 0, 25).total());
+    assertEquals(3, masters.inventory(null, "", false, 0, 25).total());
+    assertEquals(1, masters.inventory(null, "", false, 1, 2).items().size());
+    assertEquals(3, masters.inventory(null, "", false, 1, 2).total());
+  }
+
+  @Test
   void warehousesNeverBorrowStockFromEachOther() {
     long p = product("A", 20),
         other = masters.save("admin", WAREHOUSES, null, new MasterInput("W2", "분리 창고"));
