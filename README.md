@@ -28,6 +28,10 @@
 
 [실제 검증 결과와 재현](docs/recovery-soak.md): 물리 기본 백업·WAL로 거래 A 이후/B 이전의 이름 있는 지점 복구, API·PostgreSQL 전체 프로세스 종료 후 커밋 보존·진행 중 출고 롤백·동일 키 재시도를 확인했습니다. 독립 세션 8개의 15분 혼합 부하는 143,481건 모두 성공, 전체 p95 11.23ms, 주문·출고·취소 8,618사이클 후 재고 정합성을 통과했습니다. 분별 p95 증가와 자원 표본·한계도 공개합니다. [원본 JSON](docs/evidence/recovery-soak.json) · [요청별 CSV(gzip)](docs/evidence/recovery-soak-samples.csv.gz). 물리 서버 전원 차단·원격 백업·다중 노드 failover·24시간 부하 검증과 운영 배포는 하지 않았습니다.
 
+## 15분 지연 증가의 SQL 분석·전후 재측정
+
+[빈 재고 검색·취소 이력 스캔 분석과 개선](docs/soak-optimization.md): SQL을 단순화하고 확정 출고 부분 인덱스를 추가했습니다. 같은 조건의 15분·8세션에서 전체 p95는 **11.23→7.99ms**였으나 p50와 쓰기 p95는 증가했습니다. 읽기 비용 개선과 쓰기·중앙값 회귀를 함께 공개하며 모든 요청이 빨라졌다고 주장하지 않습니다. [업무별 비교 원본](docs/evidence/soak-comparison.json). 운영 배포 전입니다.
+
 ## 기술 구성
 
 - Frontend: React·TypeScript·Vite, MUI / MUI DataGrid, TanStack Query(React Query), React Hook Form, React Router
@@ -105,7 +109,7 @@ npm run dev
 
 ## 검증
 
-[커버리지 측정·전후 비교·남은 검증](docs/coverage.md): Java 라인 84.66%·분기 77.04%, React 라인 96.62%·분기 91.17%. 전체 소스를 포함한 로컬 측정이며 Playwright 커버리지는 합산하지 않습니다.
+[커버리지 측정·전후 비교·남은 검증](docs/coverage.md): Java 라인 85.46%·분기 77.55%, React 라인 96.62%·분기 91.17%. 전체 소스를 포함한 로컬 측정이며 Playwright 커버리지는 합산하지 않습니다.
 
 ```sh
 cd backend
@@ -123,7 +127,7 @@ npm run test:e2e
 
 검증 항목: 초과 출고/예약 거부, 동시 요청 재고 정합성, 중복 출고 단일 차감, 부분 입고 초과 거부, 강제 DB 장애 전체 롤백, 권한·CSRF·계정 상태, 원본 거래와 SQL 집계 일치. 브라우저는 실제 API로 상품 생성 → 발주 → 두 번 부분 입고 → 판매 예약 → 출고 → 매출 +3,000원·1건 → 취소 후 재고·매출 원복, 모바일 메뉴, 1만 상품 페이지 이동·검색을 검사합니다.
 
-검증 완료: Java 단위·통합 테스트 53개, 프런트 단위·컴포넌트 테스트 61개, 브라우저 검사 4개. [GitHub Actions 5개 작업 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/46029086322). CI는 같은 코드의 Testcontainers, 프런트, 브라우저, Docker 기동, SQL 벤치마크를 실행하며 원격 결과는 Actions 기록을 확인하세요. 미실행 검사를 통과했다고 간주하지 않습니다.
+검증 완료: Java 단위·통합 테스트 54개, 프런트 단위·컴포넌트 테스트 61개, 브라우저 검사 4개. [GitHub Actions 5개 작업 전체 성공](https://github.com/kimsoonil/CoreERP/actions/runs/46029086322). CI는 같은 코드의 Testcontainers, 프런트, 브라우저, Docker 기동, SQL 벤치마크를 실행하며 원격 결과는 Actions 기록을 확인하세요. 미실행 검사를 통과했다고 간주하지 않습니다.
 
 ## 설계·측정·포트폴리오 문서
 

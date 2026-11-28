@@ -1,0 +1,332 @@
+{
+  "recordedAt": "2026-11-28T13:23:09.756Z",
+  "environment": {
+    "os": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4",
+    "node": "v24.19.0",
+    "server": "postgres (PostgreSQL) 18.7",
+    "basebackupClient": "pg_basebackup (PostgreSQL) 19.0",
+    "api": "Java 21, Spring Boot, Hikari maximum 12",
+    "scope": "New temporary loopback-only clusters and owned child APIs; NOT production deployment"
+  },
+  "pitr": {
+    "method": "Physical pg_basebackup + archived WAL + named recovery target, promoted NEW cluster",
+    "targetName": "coreerp_before_later_trade",
+    "targetLsn": "0/44F1D48",
+    "targetTime": "2026-11-28 22:23:13.156916+09",
+    "tablesCompared": 25,
+    "allTableFingerprintsEqual": true,
+    "earlierCommittedShipmentPresent": true,
+    "laterCommittedOrderAbsent": true,
+    "sourceStockAfterLaterTrade": {
+      "onHand": 13,
+      "reserved": 0
+    },
+    "recoveredStock": {
+      "onHand": 17,
+      "reserved": 0
+    },
+    "restoredApiLogin": true,
+    "restoredApiSalesEqual": true,
+    "measuredRecoveryAndApiMs": 2376.29,
+    "limits": "Local named WAL restore point, same machine/storage; no remote archive or production RPO/RTO claim; physical recovery can advance sequences"
+  },
+  "serverCrash": {
+    "injection": "pg_ctl stop -m immediate (entire PostgreSQL instance) during shipment; SIGKILL owned Java API; restart both",
+    "inFlightStatus": 0,
+    "committedTradeSurvived": true,
+    "uncommittedShipmentRolledBack": true,
+    "stockAfterCrash": {
+      "onHand": 10,
+      "reserved": 3
+    },
+    "oldSessionAfterApiRestart": 401,
+    "reloginAndSameKeyRetry": 200,
+    "stockAfterRetry": {
+      "onHand": 7,
+      "reserved": 0
+    },
+    "recoveryToSuccessfulRetryMs": 41999.61,
+    "crashRecoveryLogObserved": true,
+    "limits": "Service processes on one host, NOT OS power loss, disk corruption, multi-node failover, or operator response time"
+  },
+  "soak": {
+    "configuredMinutes": 15,
+    "actualSeconds": 900.162,
+    "sessions": 8,
+    "readWorkers": 6,
+    "writeWorkers": 2,
+    "readThinkTimeMs": 40,
+    "writeCycleThinkTimeMs": 200,
+    "warmupExcluded": 30,
+    "requests": 144922,
+    "p50Ms": 4.11,
+    "p95Ms": 7.99,
+    "p99Ms": 9.33,
+    "maxMs": 45.46,
+    "statuses": {
+      "200": 144922
+    },
+    "operations": {
+      "products": 39904,
+      "inventory": 39903,
+      "salesReport": 39903,
+      "reserve": 8404,
+      "ship": 8404,
+      "cancelShipment": 8404
+    },
+    "completedReserveShipCancelCycles": 8404,
+    "finalStock": {
+      "onHand": 100000,
+      "reserved": 0
+    },
+    "invalidInventoryRows": 0,
+    "perMinute": [
+      {
+        "minute": 1,
+        "requests": 9714,
+        "p50Ms": 3.75,
+        "p95Ms": 7.35,
+        "p99Ms": 9.23,
+        "maxMs": 25.96,
+        "statuses": {
+          "200": 9714
+        }
+      },
+      {
+        "minute": 2,
+        "requests": 9600,
+        "p50Ms": 4.68,
+        "p95Ms": 7.83,
+        "p99Ms": 9.23,
+        "maxMs": 21.27,
+        "statuses": {
+          "200": 9600
+        }
+      },
+      {
+        "minute": 3,
+        "requests": 9676,
+        "p50Ms": 4.24,
+        "p95Ms": 7.82,
+        "p99Ms": 8.99,
+        "maxMs": 20.71,
+        "statuses": {
+          "200": 9676
+        }
+      },
+      {
+        "minute": 4,
+        "requests": 9744,
+        "p50Ms": 3.68,
+        "p95Ms": 7.75,
+        "p99Ms": 9.19,
+        "maxMs": 25.92,
+        "statuses": {
+          "200": 9744
+        }
+      },
+      {
+        "minute": 5,
+        "requests": 9786,
+        "p50Ms": 3.41,
+        "p95Ms": 7.34,
+        "p99Ms": 9.4,
+        "maxMs": 45.46,
+        "statuses": {
+          "200": 9786
+        }
+      },
+      {
+        "minute": 6,
+        "requests": 9804,
+        "p50Ms": 3.29,
+        "p95Ms": 7.17,
+        "p99Ms": 8.87,
+        "maxMs": 30.53,
+        "statuses": {
+          "200": 9804
+        }
+      },
+      {
+        "minute": 7,
+        "requests": 9684,
+        "p50Ms": 4.04,
+        "p95Ms": 8.05,
+        "p99Ms": 9.32,
+        "maxMs": 23.25,
+        "statuses": {
+          "200": 9684
+        }
+      },
+      {
+        "minute": 8,
+        "requests": 9714,
+        "p50Ms": 3.82,
+        "p95Ms": 7.73,
+        "p99Ms": 9.21,
+        "maxMs": 22.46,
+        "statuses": {
+          "200": 9714
+        }
+      },
+      {
+        "minute": 9,
+        "requests": 9696,
+        "p50Ms": 3.94,
+        "p95Ms": 7.97,
+        "p99Ms": 9.34,
+        "maxMs": 18.01,
+        "statuses": {
+          "200": 9696
+        }
+      },
+      {
+        "minute": 10,
+        "requests": 9612,
+        "p50Ms": 4.43,
+        "p95Ms": 8.24,
+        "p99Ms": 9.38,
+        "maxMs": 25.52,
+        "statuses": {
+          "200": 9612
+        }
+      },
+      {
+        "minute": 11,
+        "requests": 9630,
+        "p50Ms": 4.39,
+        "p95Ms": 8.2,
+        "p99Ms": 9.36,
+        "maxMs": 22.89,
+        "statuses": {
+          "200": 9630
+        }
+      },
+      {
+        "minute": 12,
+        "requests": 9630,
+        "p50Ms": 4.35,
+        "p95Ms": 8.15,
+        "p99Ms": 9.33,
+        "maxMs": 24.17,
+        "statuses": {
+          "200": 9630
+        }
+      },
+      {
+        "minute": 13,
+        "requests": 9630,
+        "p50Ms": 4.42,
+        "p95Ms": 8.2,
+        "p99Ms": 9.3,
+        "maxMs": 18.45,
+        "statuses": {
+          "200": 9630
+        }
+      },
+      {
+        "minute": 14,
+        "requests": 9522,
+        "p50Ms": 4.57,
+        "p95Ms": 8.33,
+        "p99Ms": 9.69,
+        "maxMs": 20.23,
+        "statuses": {
+          "200": 9522
+        }
+      },
+      {
+        "minute": 15,
+        "requests": 9480,
+        "p50Ms": 4.63,
+        "p95Ms": 8.46,
+        "p99Ms": 9.55,
+        "maxMs": 18.13,
+        "statuses": {
+          "200": 9480
+        }
+      }
+    ],
+    "resourceSamples": [
+      {
+        "elapsedSeconds": 60,
+        "javaRssKiB": 382144,
+        "databaseBytes": 21755583
+      },
+      {
+        "elapsedSeconds": 120,
+        "javaRssKiB": 383232,
+        "databaseBytes": 22877887
+      },
+      {
+        "elapsedSeconds": 180,
+        "javaRssKiB": 384048,
+        "databaseBytes": 23893695
+      },
+      {
+        "elapsedSeconds": 240,
+        "javaRssKiB": 384656,
+        "databaseBytes": 24852159
+      },
+      {
+        "elapsedSeconds": 300,
+        "javaRssKiB": 385040,
+        "databaseBytes": 25876159
+      },
+      {
+        "elapsedSeconds": 360,
+        "javaRssKiB": 385152,
+        "databaseBytes": 26646207
+      },
+      {
+        "elapsedSeconds": 420,
+        "javaRssKiB": 385312,
+        "databaseBytes": 27752127
+      },
+      {
+        "elapsedSeconds": 480,
+        "javaRssKiB": 385328,
+        "databaseBytes": 28866239
+      },
+      {
+        "elapsedSeconds": 540,
+        "javaRssKiB": 385472,
+        "databaseBytes": 29873855
+      },
+      {
+        "elapsedSeconds": 600,
+        "javaRssKiB": 385584,
+        "databaseBytes": 30840511
+      },
+      {
+        "elapsedSeconds": 660,
+        "javaRssKiB": 385792,
+        "databaseBytes": 31700671
+      },
+      {
+        "elapsedSeconds": 720,
+        "javaRssKiB": 385856,
+        "databaseBytes": 32544447
+      },
+      {
+        "elapsedSeconds": 780,
+        "javaRssKiB": 385920,
+        "databaseBytes": 33486527
+      },
+      {
+        "elapsedSeconds": 840,
+        "javaRssKiB": 385936,
+        "databaseBytes": 34567871
+      },
+      {
+        "elapsedSeconds": 900,
+        "javaRssKiB": 385968,
+        "databaseBytes": 35509951
+      }
+    ],
+    "rawSamples": "recovery-soak-samples.csv.gz",
+    "limits": "15-minute paced closed-loop local mixed workload; not 24-hour soak, saturation capacity, real concurrent user count, or proof against memory leaks"
+  }
+}

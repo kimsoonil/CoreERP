@@ -12,7 +12,7 @@
 | ReportServiceTest | KST 포함 시작/제외 종료, 연도·윤년 경계, 최대 366일, 역전·초과 기간 및 잘못된 집계 단위 차단 |
 | DailySummarySchedulerTest | 오래된 날짜 우선 처리, 어제 중복 제거, BUSY 시 나머지 연기, 실패 날짜의 다음 트리거 재시도 |
 
-`backend`에서 `./mvnw verify`로 53개를 실행합니다. Docker가 있으면 PostgreSQL 17 Testcontainers가 자동 기동됩니다. 단위 테스트만 실행하려면 `./mvnw -Dtest=ReportServiceTest,DailySummarySchedulerTest test`를 사용합니다.
+`backend`에서 `./mvnw verify`로 54개를 실행합니다. Docker가 있으면 PostgreSQL 17 Testcontainers가 자동 기동됩니다. 단위 테스트만 실행하려면 `./mvnw -Dtest=ReportServiceTest,DailySummarySchedulerTest test`를 사용합니다.
 
 ## React — Vitest·Testing Library·jsdom
 
@@ -63,3 +63,7 @@ Java에 출고·예약 취소 동시 경합 테스트를 추가했습니다. 시
 ## WAL 복구·프로세스 장애·15분 부하
 
 [recovery-soak.mjs](../tools/recovery-soak.mjs)는 새 임시 클러스터를 직접 생성하며 기존 DB 주소를 받지 않습니다. 물리 기본 백업·WAL 목표 복구, PostgreSQL immediate 종료·Java SIGKILL 후 복구, 독립 세션 8개의 15분 혼합 부하와 마지막 재고 불변식을 검사했습니다. [실측·원본 CSV·재현](recovery-soak.md). 일반 CI 118개와 별도이며 개수를 부풀려 합산하지 않습니다.
+
+## 조회 SQL 최적화 회귀 검사
+
+CoreIntegrationTest에 빈 검색·창고 지정·안전재고 필터·문자 검색·사용 중지 상품·페이지 총건수 검사를 추가했습니다. 실제 PostgreSQL에서 Mapper의 동적 SQL 결과를 검사합니다. Java 54개로 늘었고 [같은 조건의 전후 측정](soak-optimization.md)은 별도 도구와 원본 CSV로 검증합니다.
